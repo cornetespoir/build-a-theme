@@ -1,7 +1,6 @@
 :root {
   --background-color: #fff;
   --text-color: #000;
-  --background-image: url('');
   --background-size: cover;
   --sidebar-background: #ffffff;
 
@@ -30,14 +29,19 @@
 }
 
 .layout-grid section {
-  display:grid;
-  grid-gap:var(--spacing);
+  /* display:grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: masonry;
+  grid-template-rows: auto;
+  grid-auto-flow: row dense; */
+  column-count: 2;
+  break-inside:avoid;
+  grid-gap:var(--spacing);
+  margin-bottom:var(--spacing);
 }
 
 .layout-grid section article {
-  margin:0;
+  margin:var(--spacing) 0 0 0;
+  display:inline-block;
 }
 h1 {
   margin:0;
@@ -310,11 +314,13 @@ button {
 .modal .body {
   padding:var(--spacing);
   background: #1f1d2b;
+  position:relative;
+  max-width:1000px;
   border-radius:var(--spacing)
 }
 
 .modal code {
-  max-height:70vh;
+  max-height:50vh;
   overflow-y:auto;
 }
 
@@ -356,3 +362,26 @@ button {
   background:cornflowerblue;
 }
 
+.copy {
+  background:#fff;
+  padding:calc(var(--spacing) / 2);
+  border-radius:.4rem;
+  color:#000;
+  box-shadow:2px 2px 20px rgba(0,0,0,.04);
+  position:absolute;
+  width:100px;
+  text-align:center;
+}
+.close {
+  position:absolute;
+  right: 0px;
+}
+
+button.clip {
+  margin:0 var(--spacing);
+  padding:calc(var(--spacing) / 2)
+}
+
+.clipboard {
+  height:1rem;
+}

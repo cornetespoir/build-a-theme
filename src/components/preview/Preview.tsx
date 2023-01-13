@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../App";
 import { Containers } from "./Containers";
 import { PostInfo } from "./PostInfo";
 import { SamplePost } from "./SamplePost";
 
 interface PreviewProps {
-
+    className?: string
 }
-const Preview = ({ }: PreviewProps) => {
-    const { sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
+const Preview = ({ className }: PreviewProps) => {
+    const { navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
 
     const [postType, setPostType] = useState("Text");
-    const [op, setOp] = useState("Original");
-
 
     function addSections(type: string) {
         if (type === 'footer') {
@@ -29,6 +27,8 @@ const Preview = ({ }: PreviewProps) => {
         const value = element.value
         setPostType(value)
     }
+
+
     return (
         <div id='preview-frame'>
             {!header && <button onClick={() => addSections('header')} className='add-section'>Add Header</button>}
@@ -36,12 +36,15 @@ const Preview = ({ }: PreviewProps) => {
                 <Containers type='header' allowDelete>
                     {titleLocation === 'header' && <h1>Title</h1>}
                     {descriptionLocation === 'header' && <div>Description</div>}
+                    {navLocation === 'header' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                 </Containers>}
             <main className={`sidebar-${sidebar} layout-${layout}`}>
                 {sidebar &&
                     <aside className='sidebar' id='sidebar'>
                         {titleLocation === 'sidebar' && <h1>Title</h1>}
                         {descriptionLocation === 'sidebar' && <div>Description</div>}
+                        {navLocation === 'sidebar' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
+
                     </aside>
                 }
                 <section>
@@ -52,7 +55,7 @@ const Preview = ({ }: PreviewProps) => {
                             <input type="radio" value="Audio" name="postType" checked={postType === "Audio"} onChange={(event) => changePostType(event)}/> Audio
                         </div>
                         <div className='content'>
-                          <SamplePost postType={postType} op={op}/>
+                          <SamplePost postType={postType} op={'original'}/>
                         </div>
                         <PostInfo />
                     </Containers>
@@ -75,6 +78,7 @@ const Preview = ({ }: PreviewProps) => {
                     <Containers type='footer' allowDelete>
                         {titleLocation === 'footer' && <h1>Title</h1>}
                         {descriptionLocation === 'footer' && <div>Description</div>}
+                        {navLocation === 'footer' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                     </Containers>}
         </div>
     )

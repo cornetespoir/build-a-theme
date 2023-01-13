@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 
 interface SamplePostProps {
     postType: string
@@ -9,7 +9,7 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
    if (postType === 'Photo') {
     return (
         <>
-       <div className='photo'> <img src='/cherryblossom.jpg'/></div>
+       <div className='photo'> <img alt="cherry blossoms" src='/cherryblossom.jpg'/></div>
        <div className='content'>
        <p>Photo by <a href="https://unsplash.com/@ajny?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">AJ</a> on <a href="https://unsplash.com/wallpapers/nature/cherry-blossom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
        </div>
@@ -20,7 +20,7 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
    if (postType === 'Audio') {
     return (
         <>
-        <iframe className='audio' style={{borderRadius:'12px'}} src="https://open.spotify.com/embed/track/46E1ic6n099e76t5J1TbHn?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe title="shinee - view" className='audio' style={{borderRadius:'12px'}} src="https://open.spotify.com/embed/track/46E1ic6n099e76t5J1TbHn?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <div className='content'>
             View - Shinee
         </div>
@@ -53,7 +53,7 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
         <div className='reblog-header'><span className='avatar'/> <span>username</span></div>
     }
     <>
-       <div className='photo'> <img src='/cherryblossom.jpg'/></div>
+       <div className='photo'> <img alt="cherry blosssoms" src='/cherryblossom.jpg'/></div>
        <div className='content'>
        <p>Photo by <a href="https://unsplash.com/@ajny?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">AJ</a> on <a href="https://unsplash.com/wallpapers/nature/cherry-blossom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
        </div>
@@ -70,17 +70,14 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
     return (
         <div className='content'>
             {op === 'Trail' &&
-                <div className='reblog-header'><img className='avatar' src="https://64.media.tumblr.com/avatar_63ed1d13b42f_96.pnj"/> <a href="https://egg.design">eggdesign</a></div>
+                <div className='reblog-header'><img alt="eggdesign avatar" className='avatar' src="https://64.media.tumblr.com/avatar_63ed1d13b42f_96.pnj"/> <a href="https://egg.design">eggdesign</a></div>
             }
             <h2>This is a wip theme builder</h2>
             <p>to do: write out something here</p>
             {op === 'Trail' &&
                 <><div className='reblog-header'><span className='avatar'/> <span>username</span></div>   <p>Sample reply</p></>
             }
-          
-          
         </div>
-
     )
 }
 

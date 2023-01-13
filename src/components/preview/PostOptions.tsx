@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../App";
 
 const PostOptions = () => {
@@ -24,12 +24,14 @@ const PostOptions = () => {
             <label htmlFor='postInfo'>Post Info Location</label>
         
                 <button name="postInfo" id="postInfo" onClick={(event) => changeLocation(event)}>
-                    Switch to {postInfo ? 'bottom' : 'top'} aligned post info  
+                  Toggle position of post info
                   </button>
             <br/>
-            <button onClick={(event) => enableInteractions(event, 'likes')}>Enable likes</button>
+            <label>Likes</label>
+            <button onClick={(event) => enableInteractions(event, 'likes')}>Toggle Likes</button>
             <br />
-            <button onClick={(event) => enableInteractions(event, 'reblogs')}>Enable Reblogs</button>
+            <label>Reblogs</label>
+            <button onClick={(event) => enableInteractions(event, 'reblogs')}>Toggle Reblogs</button>
 
 
         </div>

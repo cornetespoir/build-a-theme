@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const ThemeOptions = () => {
 
-    const { setNavLocation, sidebar, header, footer, setTitleLocation, setDescriptionLocation, setLayout } = useContext(ThemeContext)
+    const { setSidebar, setNavLocation, sidebar, header, footer, setTitleLocation, setDescriptionLocation, setLayout } = useContext(ThemeContext)
 
     function changeLocation(event: ChangeEvent<HTMLSelectElement>, type: string) {
         if (type === 'title') {
@@ -21,6 +21,10 @@ const ThemeOptions = () => {
             setDescriptionLocation(event.target.value)
 
         }
+    }
+
+    function addSidebar() {
+        setSidebar(!sidebar)
     }
     return (
         <div className='forms'>
@@ -59,6 +63,9 @@ const ThemeOptions = () => {
                     {header && <option value="header">Header</option>}
                     {footer && <option value="footer">Footer</option>}        </select>
             }
+
+            <button onClick={addSidebar}>{sidebar ? 'Remove' : 'Add'} Sidebar</button>
+
 
         </div>
     )

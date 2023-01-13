@@ -6,6 +6,7 @@ const GetCode = () => {
     const { navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
+    const [pop, setPop] = useState(false);
     const side = document.getElementById('sidebarBg') as HTMLInputElement
 
     const title =
@@ -50,6 +51,11 @@ const pages =
             const content = codeRef.current?.innerText;
             if(content != null) {
             navigator.clipboard.writeText(content);
+            setPop(true)
+            setTimeout(() => {
+            setPop(false)
+              }, 1000)
+              
             }
         } catch(e) {
             console.log(e);
@@ -57,12 +63,28 @@ const pages =
     }
 
     return (
-        <>   <button onClick={copyCode}>
-            Copy code
-        </button>
-            <code>
+        <> 
+        <h2>How to use your code:</h2>
+        <ol>
+            <li>You will need to use the code below in your theme editor.
+            </li>
+            <li>
+                Open your theme editor (tumblr.com/customize), click on "Edit HTML"
+            </li>
+            <li>
+                Select all of the code that is already there and replace it with the new code you just copied
+            </li>
+            <li>Save and exit the code editor to start further customizing your theme based on the options you selected </li>
+        </ol>
+
+        <button className='clip' onClick={copyCode}>
+                    Copy code to clipboard <svg className='clipboard' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
+                </button> (clicking on the code below will also copy it to your clipboard)
+        {pop && <div className='copy'>Copied!</div>}
+            <code onClick={copyCode}>
                 <pre ref={codeRef}>
                     {`<!DOCTYPE html>
+    <!-- A custom theme built by eggdesign's theme builder -->
     <html> 
         <head>
             <title>{Title}</title>
@@ -72,12 +94,17 @@ const pages =
             {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
             {block:Options}
             <meta name="color:background" content="#fff"/>
+            <meta name="color:posts" content="#fff"/>
             <meta name="color:text" content="#000"/>
             <meta name="color:borders" content="#ddd"/>
             <!-- text -->
             <meta name="text:border width" content="1px"/>
+            <meta name="text:border radius" content="4px"/>
             <!-- images -->
             <meta name="image:background" content=""/>
+            <!-- boolean -->
+            <meta name="if:full background" content=""/>
+
             {/block:Options}
             {NewPostStyles}
              <style>
@@ -86,18 +113,25 @@ const pages =
                 }
                 :root {
                     --background: {color:background};
+                    --background-image:  url({image:background});
                     --accent: {AccentColor};
                     --text: {color:text};
                     --borders: {color:borders};
                     --spacing: 1rem;
                     --border-width: {text:border width};
+                    --border-radius: {text:border radius};
+                    --posts: {color:posts};
                 }
                 body {
                     font-family: sans-serif;
                     margin: 0;
                     height: 100vh;
                     color: var(--text);
-                    background: {color: background};
+                    background: var(--background) var(--background-image);
+                    {block:iffullbackground}
+                    background-size: cover;
+                    background-attachment: fixed;
+                    {/block:iffullbackground}
                 }
 
                 main, .pagination {
@@ -112,24 +146,45 @@ const pages =
                     max-width: 700px;
                     margin: calc(var(--spacing) * 4) auto;
                     border: var(--border-width) solid var(--borders);
-                    border-radius: .4rem;
+                    border-radius: var(--border-radius);
+                    background:var(--posts);
                 }
 
                 article img {
                     max-width: 100%;
                 }
-
-                .contained main {
+                .contained :is(header, footer, main) {
                     width: 100%;
                     max-width: 1000px;
-                    height: 70vh;
                     margin: 1rem auto;
-                    overflow: auto;
+                    background: var(--background);
                     border: var(--border-width) solid var(--borders);
                 }
 
-                .contained article {
+                .contained header {
+                    margin-bototm: 0;
+                    padding: var(--spacing);
+                }
+                .contained main {
+                    height: 70vh;
+                    overflow: auto;
+                }
+
+
+                .contained article, .pagination {
                     max-width: 500px;
+                }
+
+                .grid section {
+                    column-count: 2;
+                    break-inside:avoid;
+                    grid-gap:var(--spacing);
+                    margin-bottom:var(--spacing);
+                }
+
+                .grid article {
+                    display: inline-block;
+                    margin: var(--spacing) 0;
                 }
 
                 .original-post, .reblogs, .tags, .post-info, .pagination, .quote-container, .replies, .question {
@@ -166,9 +221,15 @@ const pages =
                     border: var(--border-width) solid var(--borders);
                     padding:var(--spacing);
                     max-width: 300px;
+                    border-radius: var(--border-radius);
                 }
+
                 section {
                     width: 70%;
+                }
+
+                .contained section {
+                    width:60%;
                 }
                 ` : `
                  section {
@@ -180,6 +241,12 @@ const pages =
                     .reblog_button {
                         margin-right: .4rem;
                     } 
+                ` : ``}
+
+                ${header ? `
+                    header {
+                        width: 100%;
+                    }
                 ` : ``}
 
                 .pages-container, .nav-container {
@@ -194,11 +261,27 @@ const pages =
                 .tumblr_audio_player {
                     width: 100%;
                 }
+
+                @media only screen and (max-width: 1100px) {
+                    main, .contained main, section {
+                        width: 100%;
+                        height: auto;
+                    }
+
+                    ${sidebar ? ` aside, .sidebar-container{
+                        width: 100%;
+                        height: auto;
+                    }` : ``}
+
+                    .grid section {
+                        column-count: 1;
+                    }
+
+                }
                 {CustomCSS}
             </style>
         </head>
-        <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}
-        {block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
+        <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
         `}
             {header ? <>
                         {`  <header>`}
@@ -353,17 +436,29 @@ const pages =
                         {PostNotes}
                     </article>
                     {/block:Posts}
-                    {block:Pagination}
-                    <div class="pagination flex centered">
-                        {block:previouspage}
-                        <a href="{previouspage}">Prev</a>
-                        {/block:previouspage}
-                        {block:nextpage}
-                        <a href="{nextpage}">Next</a>
-                        {/block:nextpage}
-                    </div>
-                    {/block:pagination}
                 </section>
+                {block:Pagination}
+                <div class="pagination flex centered">
+                    {block:previouspage}
+                    <a href="{previouspage}">Prev</a>
+                    {/block:previouspage}
+                        {block:JumpPagination length="5"}
+                            {block:CurrentPage}
+                            <span class="current-page">
+                                {PageNumber}
+                            </span>
+                            {/block:CurrentPage}
+                            {block:JumpPage}
+                            <a href="{URL}">
+                                {PageNumber}
+                            </a>
+                            {/block:JumpPage}
+                        {/block:JumpPagination}
+                    {block:nextpage}
+                    <a href="{nextpage}">Next</a>
+                    {/block:nextpage}
+                </div>
+                {/block:Pagination}
                 ${footer ? `<footer>
                 ${titleLocation === 'footer' ? title : ''}
                 ${descriptionLocation === 'footer' ? description : ''}
