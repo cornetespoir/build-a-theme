@@ -134,6 +134,18 @@ const pages =
                     {/block:iffullbackground}
                 }
 
+                a {
+                    color: var(--text);
+                }
+
+                article a {
+                    text-decoration: none;
+                }
+
+                article a:hover {
+                    text-decoration: underline;
+                }
+
                 main, .pagination {
                     display: flex;
                     flex-wrap: wrap;
@@ -156,6 +168,16 @@ const pages =
 
                 article img {
                     max-width: 100%;
+                }
+
+                .reblog-header a {
+                    display: flex;
+                    align-items:center;
+                }
+
+                .reblog-header img {
+                    padding-right: .4rem;
+                    max-height: 1.4rem;
                 }
                 .contained :is(header, footer, main) {
                     width: 100%;
@@ -411,7 +433,7 @@ const pages =
                                         <div class="reblogs">
                                             <div class="reblog-header">
                                                 <a href="{permalink}" {block:isdeactivated}class="inactive"{/block:isdeactivated}>
-                                                        {username}
+                                                      <img src={PortraitURL-64} alt="{username}">  {username}
                                                     </a>
                                             </div>
                                             <div class="reblog-content">
