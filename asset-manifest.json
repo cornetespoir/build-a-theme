@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/build-a-theme/static/css/main.5fe0255d.css",
+    "main.js": "/build-a-theme/static/js/main.31caebe9.js",
+    "index.html": "/build-a-theme/index.html",
+    "main.5fe0255d.css.map": "/build-a-theme/static/css/main.5fe0255d.css.map",
+    "main.31caebe9.js.map": "/build-a-theme/static/js/main.31caebe9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5fe0255d.css",
+    "static/js/main.31caebe9.js"
+  ]
+}
