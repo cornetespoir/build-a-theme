@@ -55,7 +55,6 @@ const PostOptions = () => {
                     <input id="largePost" type="radio" value="large" name="postSize" checked={postSize === "large"} onChange={(event) => changeSize(event, 'post')} />  <label htmlFor="largePost"><i></i> <span>700px</span></label>
                 </div>
             }
-            <h4>Date, notes, likes, and reblogs</h4>
             <div className='flex'>
                 <label className='half' htmlFor='postInfo'>Post info location</label>
                 <div className={`info-switch post-info-switch ${active}-active`}>

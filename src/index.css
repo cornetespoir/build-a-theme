@@ -653,6 +653,7 @@ label.half,
   background: transparent;
   color: white;
   border: 0;
+  font-size:1rem;
 }
 
 .bottom-active:before {
@@ -766,6 +767,6 @@ select {
   padding:var(--spacing);
 }
 
-.select-sidebar {
-  margin-bottom:var(--spacing);
+.select-size {
+  margin-bottom:calc(var(--spacing) * 2);
 }
