@@ -58,7 +58,7 @@ const PostOptions = () => {
             <h4>Date, notes, likes, and reblogs</h4>
             <div className='flex'>
                 <label className='half' htmlFor='postInfo'>Post info location</label>
-                <div className={`post-info-switch ${active}-active`}>
+                <div className={`info-switch post-info-switch ${active}-active`}>
                     <button className={active === 'top' ? 'active-button' : 'inactive-button'} name="postInfo" id="postInfoTop" onClick={(event) => changeLocation(event, 'top')}>
                         Top
                     </button>

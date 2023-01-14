@@ -17,7 +17,9 @@ function App() {
   const [layout, setLayout] = useState('default')
   const [postSize, setPostSize] = useState('large')
   const [gridSize, setGridSize] = useState('small')
-  const initalStates = { gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
+  const [sidebarStyle, setSidebarStyle] = useState('default')
+  const [sidebarLocation, setSidebarLocation] = useState(false)
+  const initalStates = {sidebarLocation, setSidebarLocation, sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
 
   return (
     <div className="App">

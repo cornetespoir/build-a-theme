@@ -25,6 +25,10 @@ export interface layoutContext {
     setPostSize: Dispatch<SetStateAction<string>>,
     gridSize: string,
     setGridSize: Dispatch<SetStateAction<string>>,
+    sidebarStyle: string,
+    setSidebarStyle: Dispatch<SetStateAction<string>>,
+    sidebarLocation: boolean,
+    setSidebarLocation: Dispatch<SetStateAction<boolean>>,
   }
   
   export const initialValues = {
@@ -52,4 +56,8 @@ export interface layoutContext {
     setPostSize: () => { },
     gridSize: '',
     setGridSize: () => { },
+    sidebarStyle: '',
+    setSidebarStyle: () => { },
+    sidebarLocation: false,
+    setSidebarLocation: () => { },
   }

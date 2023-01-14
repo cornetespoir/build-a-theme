@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const { gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const { sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
@@ -13,7 +13,7 @@ const GetCode = () => {
         `
                     <h2>{Title}</h2>
                     `
-const pages = 
+    const pages =
         `
             {block:HasPages}
             <div class="pages-container">
@@ -22,8 +22,8 @@ const pages =
                 {/block:Pages}
                 </div>
             {/block:HasPages}
-        `          
-    const nav = 
+        `
+    const nav =
         `
            <div class="nav-container">
                 <a href="/">{lang:Home}</a>
@@ -35,8 +35,8 @@ const pages =
                 {/block:submissionsenabled}
                 <a href="/archive">Archive</a>
            </div> 
-        `         + pages       
-      
+        ` 
+
 
     const description = `<div class="description">{Description}</div>`
 
@@ -49,42 +49,42 @@ const pages =
     const copyCode = async () => {
         try {
             const content = codeRef.current?.innerText;
-            if(content != null) {
-            navigator.clipboard.writeText(content);
-            setPop(true)
-            setTimeout(() => {
-            setPop(false)
-              }, 2000)
-              
+            if (content != null) {
+                navigator.clipboard.writeText(content);
+                setPop(true)
+                setTimeout(() => {
+                    setPop(false)
+                }, 2000)
+
             }
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
     }
 
     return (
-        <> 
-        <h2>How to use your code:</h2>
-        <ol>
-            <li>You will need to use the code below in your theme editor.
-            </li>
-            <li>
-                Open your theme editor (tumblr.com/customize), click on "Edit HTML"
-            </li>
-            <li>
-                Select all of the code that is already there and replace it with the new code you just copied
-            </li>
-            <li>Save and exit the code editor to start further customizing your theme based on the options you selected </li>
-        </ol>
+        <>
+            <h2>How to use your code:</h2>
+            <ol>
+                <li>You will need to use the code below in your theme editor.
+                </li>
+                <li>
+                    Open your theme editor (tumblr.com/customize), click on "Edit HTML"
+                </li>
+                <li>
+                    Select all of the code that is already there and replace it with the new code you just copied
+                </li>
+                <li>Save and exit the code editor to start further customizing your theme based on the options you selected </li>
+            </ol>
 
-        <button className='clip' onClick={copyCode}>
-                    Copy code to clipboard <svg className='clipboard' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
-                </button>
-        {pop && <div className='copy'>Copied!</div>}
-        <div className="code">
-            <code>
-                <pre ref={codeRef}>
-                    {`<!DOCTYPE html>
+            <button className='clip' onClick={copyCode}>
+                Copy code to clipboard <svg className='clipboard' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" /></svg>
+            </button>
+            {pop && <div className='copy'>Copied!</div>}
+            <div className="code">
+                <code>
+                    <pre ref={codeRef}>
+                        {`<!DOCTYPE html>
     <!-- A custom theme built by eggdesign's theme builder -->
     <html> 
         <head>
@@ -124,6 +124,7 @@ const pages =
                     --border-width: {text:border width};
                     --border-radius: {text:border radius};
                     --posts: {color:posts};
+                    --headerimage: url({HeaderImage});
                 }
                 body {
                     font-family: Roboto, sans-serif;
@@ -156,17 +157,18 @@ const pages =
                     justify-content: space-around;
                 }
 
+                main {
+                    max-width:1200px;
+                    margin:auto;
+                }
+
                 article, .pagination {
                     width: 100%;
-                    max-width: ${postSize === 'small' ?  '400px' : postSize === 'medium' ? '540px' : '700px'};
+                    max-width: ${postSize === 'small' ? '400px' : postSize === 'medium' ? '540px' : '700px'};
                     margin: calc(var(--spacing) * 4) auto;
                     border: var(--border-width) solid var(--borders);
                     border-radius: var(--border-radius);
                     background:var(--posts);
-                }
-
-                article {
-                    margin: calc(var(--spacing) * 4) 0;
                 }
 
                 article img {
@@ -253,7 +255,61 @@ const pages =
                     max-width: 300px;
                     border-radius: var(--border-radius);
                 }
+                .sidebar-style-dash {
+                    padding:0;
+                    text-align:center;
+                }
+                .sidebar-style-dash :is(h2, div){
+                    padding:var(--spacing);
+                }
+                .sidebar-style-dash h2 + div, .sidebar-style-dash div + div {
+                    padding-top:0;
+                  }
 
+                .sidebar-style-bubble {
+                    padding: 0;
+                    border: 0;
+                }
+                
+                .bubble {
+                    display:flex;
+                    flex-wrap:wrap;
+                    align-items:center;
+                }
+            
+                .bubble-desc {
+                    border:var(--border-width) solid var(--borders);
+                    padding: var(--spacing);
+                    width:100%;
+                    border-radius:.6rem;
+                    border-top-left-radius:0;
+                    margin:var(--spacing) 0;
+                }
+                
+                .sidebar-style-bubble img {
+                    width:48px;
+                    border-radius:50%;
+                    margin-right:.4rem;
+                }
+
+                 {block:ShowHeaderImage}
+                  {block:ShowAvatar}
+                    .header-image + * {
+                        margin-top:24px;
+                    }
+                  {/block:ShowAvatar}
+                  {/block:ShowHeaderImage}
+
+                .header-image img {
+                    width:48px;
+                    background:#facade;
+                    height:48px;
+                    {block:ShowHeaderImage}
+                    position:absolute;
+                    bottom: -24px;
+                    {/block:ShowHeaderImage}
+                    border-radius:50%;
+                }
                 section {
                     width: 70%;
                 }
@@ -261,24 +317,32 @@ const pages =
                 .contained section {
                     width:60%;
                 }
-                ` : `
+
+                .header-image {
+                    position: relative;
+                    {block:ShowHeaderImage}
+                    display:flex;
+                    justify-content:center;
+                    background: var(--headerimage);
+                    aspect-ratio: 4/1;
+                    background-attachment: fixed;
+                    background-size:cover;
+                    {/block:ShowHeaderImage}
+                }` : `
                  section {
                     width: 100%;
                  }
                 `}
-
                 ${reblogs && likes ? `
                     .reblog_button {
                         margin-right: .4rem;
                     } 
                 ` : ``}
-
                 ${header ? `
                     header {
                         width: 100%;
                     }
                 ` : ``}
-
                 .pages-container, .nav-container {
                     margin: calc(var(--spacing) /4) 0;
                 }
@@ -301,12 +365,12 @@ const pages =
                         width: 100%;
                         height: auto;
                     }
-
                     ${sidebar ? ` aside, .sidebar-container{
                         width: 100%;
+                        max-width:100%;
                         height: auto;
+                        position:relative;
                     }` : ``}
-
                     .grid section {
                         column-count: 1;
                     }
@@ -317,23 +381,47 @@ const pages =
         </head>
         <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
         `}
-            {header ? <>
-                        {`  <header>`}
-                        {titleLocation === 'header' ? title : ''}
-                        {descriptionLocation === 'header' ? description : ''}
-                        {navLocation === 'header' ? nav : ''}
-                        {`</header>
+                        {header ? <>
+                            {`  <header>`}
+                            {titleLocation === 'header' ? title : ''}
+                            {descriptionLocation === 'header' ? description : ''}
+                            {navLocation === 'header' ? nav + pages : ''}
+                            {`</header>
                 `} </> : ''}
-            {`<main>`}
-                    {sidebar ? (<>
-                        {`<aside>
-                            <div class="sidebar-container">`}
-                            {titleLocation === 'sidebar' ? title : ''}
-                            {descriptionLocation === 'sidebar' ? description : ''}
-                            {navLocation === 'sidebar' ? nav : ''}
+                        {`<main>`}
+                        {sidebar && !sidebarLocation ? (<>
+            {`
+            <aside>
+                <div class="sidebar-container sidebar-style-${sidebarStyle}">
+                        `}
+                            {sidebarStyle === 'dash' ?
+                                <>
+                                {`<div class="header-image"><img src="{PortraitURL-128}"></div>`}
+                                {titleLocation === 'sidebar' ? title : ''}
+                                {descriptionLocation === 'sidebar' ? description : ''}
+                                {navLocation === 'sidebar' ? nav + pages : ''}
+                                </>
+                                : sidebarStyle === 'bubble' ?
+                                    <>
+                                        {`<div class="bubble">
+                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@username</a>
+                                    <div class="bubble-desc">`}
+                                        {titleLocation === 'sidebar' ? title : ''}
+                                        {descriptionLocation === 'sidebar' ? description : ''}
+                                        {navLocation === 'sidebar' ? pages : ''}
+                                        {`</div>`}
+                                        {navLocation === 'sidebar' ? nav : ''} 
+                                {`</div>`}
+                                    </>
+                                    : <>
+                                        {titleLocation === 'sidebar' ? title : ''}
+                                        {descriptionLocation === 'sidebar' ? description : ''}
+                                        {navLocation === 'sidebar' ? nav : ''}
+                                    </>
+                            }
                             {`
-                            </div>
-                        </aside>`}</>) : ''}
+                        </div>
+                </aside>`}</>) : ''}
                     {`
                 <section>
                     {block:Posts}
@@ -347,14 +435,14 @@ const pages =
                     {/block:ContentSource}
                     <article id="{PostID}">
                         ${postInfo ? (
-                            `{block:Date}<div class="post-info">
+                                `{block:Date}<div class="post-info">
                                 <div class="note-info">
                                     <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div> 
                                 ${likes || reblogs
-                                ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
-                                : ''}
+                                    ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
+                                    : ''}
                                 </div>{/block:Date}`)
-                            : ''}  
+                                : ''}  
                         <!-- photo, photoset, and panorama posts -->           
                                 {block:Photo}
                                     <img src="{PhotoURL-HighRes}" alt="{photoalt}" class="photos">
@@ -451,14 +539,14 @@ const pages =
                                     {/block:RebloggedFrom}
                                 </div>
                             ${!postInfo ? (
-                            `{block:Date}<div class="post-info">
+                                `{block:Date}<div class="post-info">
                                 <div class="note-info">
                                     <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div>
                                 ${likes || reblogs
-                                ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
-                                : ''}
+                                    ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
+                                    : ''}
                                 </div>{/block:Date}`)
-                            : ''}  
+                                : ''}  
                             {block:Hastags}
                             <div class="tags">
                                 {block:Tags}
@@ -469,7 +557,41 @@ const pages =
                         {PostNotes}
                     </article>
                     {/block:Posts}
-                </section>
+                </section>`}
+                {sidebar && sidebarLocation ? (<>
+            {`
+            <aside>
+                <div class="sidebar-container sidebar-style-${sidebarStyle}">
+                        `}
+                            {sidebarStyle === 'dash' ?
+                                <>
+                                {`<div class="header-image"><img src="{PortraitURL-128}"></div>`}
+                                {titleLocation === 'sidebar' ? title : ''}
+                                {descriptionLocation === 'sidebar' ? description : ''}
+                                {navLocation === 'sidebar' ? nav + pages : ''}
+                                </>
+                                : sidebarStyle === 'bubble' ?
+                                    <>
+                                        {`<div class="bubble">
+                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@username</a>
+                                    <div class="bubble-desc">`}
+                                        {titleLocation === 'sidebar' ? title : ''}
+                                        {descriptionLocation === 'sidebar' ? description : ''}
+                                        {navLocation === 'sidebar' ? pages : ''}
+                                        {`</div>`}
+                                        {navLocation === 'sidebar' ? nav : ''} 
+                                {`</div>`}
+                                    </>
+                                    : <>
+                                        {titleLocation === 'sidebar' ? title : ''}
+                                        {descriptionLocation === 'sidebar' ? description : ''}
+                                        {navLocation === 'sidebar' ? nav : ''}
+                                    </>
+                            }
+                            {`
+                        </div>
+                </aside>`}</>) : ''}
+                {`
                 {block:Pagination}
                 <div class="pagination flex centered">
                     {block:previouspage}
@@ -501,9 +623,9 @@ const pages =
             </main>
         </html>
             `}
-                </pre>
-            </code>
-            <button className="hovercopy" onClick={copyCode}><i className="fas fa-clone"></i></button> 
+                    </pre>
+                </code>
+                <button className="hovercopy" onClick={copyCode}><i className="fas fa-clone"></i></button>
             </div>
         </>
     )

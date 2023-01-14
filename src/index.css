@@ -73,6 +73,7 @@ article.sections:before,
   color: white;
   font-size: .92rem;
   top: -.8rem;
+  z-index:1;
   right: 1rem;
   padding: calc(var(--spacing) / 6) calc(var(--spacing) / 2);
   border-radius: var(--spacing);
@@ -228,6 +229,10 @@ main {
   flex-wrap: wrap;
 }
 
+main.sidebar-right-true {
+  flex-direction:row-reverse;
+}
+
 .App {
   display: flex;
   flex-wrap: wrap;
@@ -346,6 +351,7 @@ button {
   align-items: center;
   backdrop-filter: blur(10px);
   color: white;
+  z-index:1;
   justify-content: center;
 }
 
@@ -617,18 +623,18 @@ aside button {
 /* Post Info Toggle Switch */
 
 label.half,
-.post-info-switch {
+.info-switch {
   width: 50%;
   position: relative;
 }
 
-.post-info-switch {
+.info-switch {
   border: 1px solid rgba(var(--white), .2);
   border-radius: .6rem;
   overflow: hidden;
 }
 
-.post-info-switch:before {
+.info-switch:before {
   content: '';
   position: absolute;
   width: 50%;
@@ -637,7 +643,11 @@ label.half,
   background: var(--porple);
 }
 
-.post-info-switch button {
+.sidebar-info-switch:before {
+  margin-left:0%;
+}
+
+.info-switch button {
   width: 50%;
   position: relative;
   background: transparent;
@@ -651,6 +661,15 @@ label.half,
 
 .top-active:before {
   animation: move-right .4s 1 forwards
+}
+
+.left-active:before {
+  animation: move-right .4s 1 forwards
+
+}
+
+.right-active:before {
+  animation: move-left .5s 1 forwards
 }
 
 @keyframes move-left {
@@ -692,4 +711,61 @@ select {
 
 .disclaimer i {
   padding-right: .4rem;
+}
+
+
+.style-dash {
+  padding:0;
+  text-align:center;
+}
+
+.dash-avatar, .bubble-avatar {
+  width:40px;
+  background:#facade;
+  height:40px;
+  position:absolute;
+  bottom: -20px;
+  border-radius:50%;
+}
+
+.bubble-avatar {
+  position:relative;
+  bottom:auto;
+  margin-right:.4rem;
+}
+.bubble {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.bubble-desc {
+  margin:var(--spacing) 0;
+  border-radius:.6rem;
+  width:100%;
+  border:1px solid #ddd;
+  padding:var(--spacing);
+  border-top-left-radius:0;
+}
+
+.dash-header {
+  width:100%;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  background:cornflowerblue;
+  aspect-ratio: 8 / 2;
+}
+
+.style-dash h1 {
+  margin-top:20px;
+}
+.style-dash h1 + div, .style-dash div + div {
+  padding-top:0;
+}
+.style-dash :is(h1, div) {
+  padding:var(--spacing);
+}
+
+.select-sidebar {
+  margin-bottom:var(--spacing);
 }

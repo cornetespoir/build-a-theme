@@ -8,7 +8,7 @@ interface PreviewProps {
     className?: string
 }
 const Preview = ({ className }: PreviewProps) => {
-    const { gridSize, postSize, navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
+    const { sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
 
     const [postType, setPostType] = useState("Text");
 
@@ -38,12 +38,36 @@ const Preview = ({ className }: PreviewProps) => {
                     {descriptionLocation === 'header' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
                     {navLocation === 'header' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                 </Containers>}
-            <main className={`sidebar-${sidebar} layout-${layout} ${layout === 'grid' && `grid-${gridSize}`} post-${postSize}`}>
+            <main className={`sidebar-${sidebar} layout-${layout} ${layout === 'grid' && `grid-${gridSize}`} post-${postSize} sidebar-right-${sidebarLocation}`}>
                 {sidebar &&
-                    <aside className='sidebar' id='sidebar'>
+                    <aside className={`sidebar style-${sidebarStyle}`} id='sidebar'>
+                        {sidebarStyle === 'bubble' ? 
+                        <div className='bubble'>
+                        <div className='bubble-avatar'></div> @username
+                          <div className="bubble-desc">
+                          {titleLocation === 'sidebar' && <h1>Title</h1>}
+                            {descriptionLocation === 'sidebar' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
+                         </div>
+                            {navLocation === 'sidebar' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
+                        </div>
+                        : sidebarStyle === 'dash' ?
+                        <>
+                        <div className='dash-header'>
+                            <div className='dash-avatar'>
+                            </div>
+                        </div>
                         {titleLocation === 'sidebar' && <h1>Title</h1>}
                         {descriptionLocation === 'sidebar' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
                         {navLocation === 'sidebar' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
+                        </>
+                        :
+                        <>
+                        {titleLocation === 'sidebar' && <h1>Title</h1>}
+                        {descriptionLocation === 'sidebar' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
+                        {navLocation === 'sidebar' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
+                       </>
+                        }
+                        
 
                     </aside>
                 }
