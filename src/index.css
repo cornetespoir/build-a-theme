@@ -79,6 +79,13 @@ article.sections:before,
   content: 'sidebar'
 }
 
+.header:before {
+  content:'header'
+}
+
+.footer:before {
+  content:'footer'
+}
 article.sections {
   max-width: 540px;
   margin: var(--spacing) auto;
@@ -423,7 +430,7 @@ aside button {
 }
 
 .grid-large section {
-  column-count: 4;
+  column-count: 2;
 }
 
 :where(.grid-large, .grid-small, .grid-medium) article {

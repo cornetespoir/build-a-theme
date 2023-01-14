@@ -9,7 +9,7 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
    if (postType === 'Photo') {
     return (
         <>
-       <div className='photo'> <img alt="cherry blossoms" src='/cherryblossom.jpg'/></div>
+       <div className='photo'> <img alt="cherry blossoms" src='./cherryblossom.jpg'/></div>
        <div className='content'>
        <p>Photo by <a href="https://unsplash.com/@ajny?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">AJ</a> on <a href="https://unsplash.com/wallpapers/nature/cherry-blossom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
        </div>

@@ -21,7 +21,7 @@ const Containers = ({ id, className, type, allowDelete, children }: ContainersPr
     }
   }
     return (
-        <article className={`sections ${className}`}>
+        <article className={`sections ${className} ${type}`}>
             {children}
             {allowDelete && <button className='delete-button' onClick={() => setOpen(!open)}>Delete</button>}
             {open === true &&
