@@ -5,6 +5,7 @@ import { PostOptions } from './PostOptions'
 import { Modal } from '../Modal'
 import { SidebarStyles } from "./SidebarStyles";
 import { ThemeContext } from "../../App";
+// import { ExtraOptions } from "./ExtraOptions";
 
 const Customize = () => {
     const {sidebar} = useContext(ThemeContext)

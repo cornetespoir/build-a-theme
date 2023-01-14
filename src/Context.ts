@@ -29,6 +29,10 @@ export interface layoutContext {
     setSidebarStyle: Dispatch<SetStateAction<string>>,
     sidebarLocation: boolean,
     setSidebarLocation: Dispatch<SetStateAction<boolean>>,
+    sideImage: string,
+    setSideImage: Dispatch<SetStateAction<string>>,
+    updatesTab: string,
+    setUpdatesTab: Dispatch<SetStateAction<string>>,
   }
   
   export const initialValues = {
@@ -60,4 +64,8 @@ export interface layoutContext {
     setSidebarStyle: () => { },
     sidebarLocation: false,
     setSidebarLocation: () => { },
+    sideImage: '',
+    setSideImage: () => { },
+    updatesTab: '',
+    setUpdatesTab: () => { },
   }

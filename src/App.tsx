@@ -19,7 +19,13 @@ function App() {
   const [gridSize, setGridSize] = useState('small')
   const [sidebarStyle, setSidebarStyle] = useState('default')
   const [sidebarLocation, setSidebarLocation] = useState(false)
-  const initalStates = {sidebarLocation, setSidebarLocation, sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
+  const [sideImage, setSideImage] = useState('default')
+  const [updatesTab, setUpdatesTab] = useState('default')
+
+  const initalStates = {sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
+    sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, 
+    setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, 
+    footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
 
   return (
     <div className="App">
