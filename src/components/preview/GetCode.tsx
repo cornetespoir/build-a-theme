@@ -497,8 +497,8 @@ const pages =
                 ${navLocation === 'footer' ? nav : ''}
                 </footer>` : ''}
                 </body>
-                </main>
-                </html>
+            </main>
+        </html>
             `}
                 </pre>
             </code>

@@ -38,7 +38,7 @@ const Preview = ({ className }: PreviewProps) => {
                     {descriptionLocation === 'header' && <div>Description</div>}
                     {navLocation === 'header' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                 </Containers>}
-            <main className={`sidebar-${sidebar} layout-${layout} grid-${gridSize} post-${postSize}`}>
+            <main className={`sidebar-${sidebar} layout-${layout} ${layout === 'grid' && grid-${gridSize}} post-${postSize}`}>
                 {sidebar &&
                     <aside className='sidebar' id='sidebar'>
                         {titleLocation === 'sidebar' && <h1>Title</h1>}
