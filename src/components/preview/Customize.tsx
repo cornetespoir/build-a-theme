@@ -15,7 +15,8 @@ return (
     <aside>
         <ThemeOptions />
         <PostOptions />
-        <button onClick={toggleModal}>Get Code</button>
+        <h4>Ready to start using your theme?</h4>
+        <button onClick={toggleModal}>Get the code</button>
         <Modal show={showModal} closeModal={toggleModal}>
             <GetCode/>
         </Modal>

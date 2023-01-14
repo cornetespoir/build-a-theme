@@ -14,7 +14,7 @@ const Modal = ({ show, closeModal, children }: ModalProps) => {
   return ReactDOM.createPortal(
       <div className="modal">
         <div className="body">
-            <button className='close' onClick={closeModal}>Close Modal</button>
+            <button className='close' onClick={closeModal}><i className="far fa-times-circle"></i></button>
           {children}
         </div>
       </div>

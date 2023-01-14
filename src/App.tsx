@@ -16,7 +16,7 @@ function App() {
   const [titleLocation, setTitleLocation] = useState('none')
   const [layout, setLayout] = useState('default')
   const [postSize, setPostSize] = useState('large')
-  const [gridSize, setGridSize] = useState('large')
+  const [gridSize, setGridSize] = useState('small')
   const initalStates = { gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
 
   return (
