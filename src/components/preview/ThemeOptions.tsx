@@ -63,10 +63,8 @@ const ThemeOptions = () => {
                     {header && <option value="header">Header</option>}
                     {footer && <option value="footer">Footer</option>}        </select>
             }
-
-            <button onClick={addSidebar}>{sidebar ? 'Remove' : 'Add'} Sidebar</button>
-
-
+            <label htmlFor='postStyle'>Sidebar</label>
+            <button onClick={addSidebar}>Toggle Sidebar</button>
         </div>
     )
 }

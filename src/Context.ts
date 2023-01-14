@@ -18,9 +18,13 @@ export interface layoutContext {
     reblogs: boolean,
     setReblogs: Dispatch<SetStateAction<boolean>>,
     postInfo: boolean,
-    setPostInfo: Dispatch<SetStateAction<boolean>>
+    setPostInfo: Dispatch<SetStateAction<boolean>>,
     layout: string,
-    setLayout: Dispatch<SetStateAction<string>>
+    setLayout: Dispatch<SetStateAction<string>>,
+    postSize: string,
+    setPostSize: Dispatch<SetStateAction<string>>,
+    gridSize: string,
+    setGridSize: Dispatch<SetStateAction<string>>,
   }
   
   export const initialValues = {
@@ -44,4 +48,8 @@ export interface layoutContext {
     setPostInfo: () => { },
     layout: '',
     setLayout: () => { },
+    postSize: '',
+    setPostSize: () => { },
+    gridSize: '',
+    setGridSize: () => { },
   }

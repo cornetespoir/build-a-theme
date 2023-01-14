@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const { navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const { gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
@@ -143,11 +143,15 @@ const pages =
 
                 article, .pagination {
                     width: 100%;
-                    max-width: 700px;
+                    max-width: ${postSize === 'small' ?  '250px' : postSize === 'medium' ? '540px' : '700px'};
                     margin: calc(var(--spacing) * 4) auto;
                     border: var(--border-width) solid var(--borders);
                     border-radius: var(--border-radius);
                     background:var(--posts);
+                }
+
+                article {
+                    margin: calc(var(--spacing) * 4) 0;
                 }
 
                 article img {
@@ -176,14 +180,15 @@ const pages =
                 }
 
                 .grid section {
-                    column-count: 2;
+                    column-count: ${gridSize === 'medium' ? '3' : '2'};
                     break-inside:avoid;
-                    grid-gap:var(--spacing);
+                    grid-gap:calc(var(--spacing) * 2);
                     margin-bottom:var(--spacing);
                 }
 
                 .grid article {
                     display: inline-block;
+                    max-width:calc(100% - var(--spacing));
                     margin: var(--spacing) 0;
                 }
 
@@ -419,8 +424,7 @@ const pages =
                             ${!postInfo ? (
                             `{block:Date}<div class="post-info">
                                 <div class="note-info">
-                                    <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div> 
-                                </div> 
+                                    <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div>
                                 ${likes || reblogs
                                 ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
                                 : ''}

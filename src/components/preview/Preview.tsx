@@ -8,7 +8,7 @@ interface PreviewProps {
     className?: string
 }
 const Preview = ({ className }: PreviewProps) => {
-    const { navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
+    const { gridSize, postSize, navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
 
     const [postType, setPostType] = useState("Text");
 
@@ -38,7 +38,7 @@ const Preview = ({ className }: PreviewProps) => {
                     {descriptionLocation === 'header' && <div>Description</div>}
                     {navLocation === 'header' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                 </Containers>}
-            <main className={`sidebar-${sidebar} layout-${layout}`}>
+            <main className={`sidebar-${sidebar} layout-${layout} grid-${gridSize} post-${postSize}`}>
                 {sidebar &&
                     <aside className='sidebar' id='sidebar'>
                         {titleLocation === 'sidebar' && <h1>Title</h1>}
