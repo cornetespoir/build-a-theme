@@ -157,7 +157,7 @@ const pages =
 
                 article, .pagination {
                     width: 100%;
-                    max-width: ${postSize === 'small' ?  '250px' : postSize === 'medium' ? '540px' : '700px'};
+                    max-width: ${postSize === 'small' ?  '400px' : postSize === 'medium' ? '540px' : '700px'};
                     margin: calc(var(--spacing) * 4) auto;
                     border: var(--border-width) solid var(--borders);
                     border-radius: var(--border-radius);

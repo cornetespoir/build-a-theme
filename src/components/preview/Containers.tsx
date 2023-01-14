@@ -9,7 +9,7 @@ interface ContainersProps {
 }
 const Containers = ({ id, className, type, allowDelete, children }: ContainersProps) => {
   const [open, setOpen] = useState(false);
-  const {header, footer, setHeader, setFooter} = useContext(ThemeContext)
+  const {setHeader, setFooter} = useContext(ThemeContext)
 
   function deleteButton(type: string) {
     if (type === 'header') {

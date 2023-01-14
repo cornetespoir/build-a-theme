@@ -15,7 +15,7 @@ const ThemeOptions = () => {
 
         else if (type === 'layout') {
             if (setLayout != null)
-            setLayout(event.target.value)
+                setLayout(event.target.value)
         }
         else {
             setDescriptionLocation(event.target.value)
@@ -54,7 +54,7 @@ const ThemeOptions = () => {
                     {header && <option value="header">Header</option>}
                     {footer && <option value="footer">Footer</option>}        </select>
             }
-             <label htmlFor='navLocation'>Navigation Location</label>
+            <label htmlFor='navLocation'>Navigation Location</label>
             {!footer && !header && !sidebar ? <p className='disclaimer'>please enable a header, sidebar, or footer</p>
                 :
                 <select name="title" id="title" onChange={(event) => changeLocation(event, 'nav')}>
@@ -63,8 +63,12 @@ const ThemeOptions = () => {
                     {header && <option value="header">Header</option>}
                     {footer && <option value="footer">Footer</option>}        </select>
             }
-            <label htmlFor='postStyle'>Sidebar</label>
-            <button onClick={addSidebar}>Toggle Sidebar</button>
+            <div className='like-reblog-options'>
+                <div className="flex">
+                    <label className='half'>Sidebar</label>
+                    <button className={`toggle-button toggle-${sidebar}`} onClick={addSidebar}>Toggle Sidebar</button>
+                </div>
+            </div>
         </div>
     )
 }

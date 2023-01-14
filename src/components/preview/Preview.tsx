@@ -49,37 +49,43 @@ const Preview = ({ className }: PreviewProps) => {
                 }
                 <section>
                     <Containers type='article' className={`${postInfo && 'top-post-info'}`}>
-                    <div className='post-types'>preview as:
-                            <input type="radio" value="Text" name="postType" checked={postType === "Text"} onChange={(event) => changePostType(event)}/> Text
-                            <input type="radio" value="Photo" name="postType" checked={postType === "Photo"} onChange={(event) => changePostType(event)}/> Photo
-                            <input type="radio" value="Audio" name="postType" checked={postType === "Audio"} onChange={(event) => changePostType(event)}/> Audio
+                        <div className='post-types'>preview as:
+                            <input type="radio" value="Text" name="postType" checked={postType === "Text"} onChange={(event) => changePostType(event)} /> Text
+                            <input type="radio" value="Photo" name="postType" checked={postType === "Photo"} onChange={(event) => changePostType(event)} /> Photo
+                            <input type="radio" value="Audio" name="postType" checked={postType === "Audio"} onChange={(event) => changePostType(event)} /> Audio
                         </div>
-                        <div className='content'>
-                          <SamplePost postType={postType} op={'original'}/>
+                        <div className="postcontent">
+                            <div className='content'>
+                                <SamplePost postType={postType} op={'original'} />
+                            </div>
+                            <PostInfo />
                         </div>
-                        <PostInfo />
                     </Containers>
                     <Containers type='article' className={`${postInfo && 'top-post-info'}`}>
-                        <div className='content'>
-                          <SamplePost postType={'Sample'} op={'Trail'}/>
+                        <div className="postcontent">
+                            <div className='content'>
+                                <SamplePost postType={'Sample'} op={'Trail'} />
+                            </div>
+                            <PostInfo />
                         </div>
-                        <PostInfo />
                     </Containers>
                     <Containers type='article' className={`${postInfo && 'top-post-info'}`}>
-                        <div className='content'>
-                          <SamplePost postType={'SamplePhoto'} op={'Trail'}/>
+                        <div className="postcontent">
+                            <div className='content'>
+                                <SamplePost postType={'SamplePhoto'} op={'Trail'} />
+                            </div>
+                            <PostInfo />
                         </div>
-                        <PostInfo />
                     </Containers>
                 </section>
             </main>
             {!footer && <button onClick={() => addSections('footer')} className='add-section'>Add Footer</button>}
-                {footer &&
-                    <Containers type='footer' allowDelete>
-                        {titleLocation === 'footer' && <h1>Title</h1>}
-                        {descriptionLocation === 'footer' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
-                        {navLocation === 'footer' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
-                    </Containers>}
+            {footer &&
+                <Containers type='footer' allowDelete>
+                    {titleLocation === 'footer' && <h1>Title</h1>}
+                    {descriptionLocation === 'footer' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
+                    {navLocation === 'footer' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
+                </Containers>}
         </div>
     )
 }
