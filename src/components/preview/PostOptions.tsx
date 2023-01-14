@@ -42,7 +42,7 @@ const PostOptions = () => {
             <h3>Post Options</h3>
             <h4>Post size</h4>
             {layout === 'grid' ?
-                <><p className='disclaimer'>Grid themes' post sizes are based on column count</p>
+                <><p className='disclaimer'><i className="fas fa-exclamation-triangle"></i> Grid post sizes are based on columns</p>
                     <div className={`select-size grids`}>
                         <input id="smallGrid" type="radio" value="small" name="postSize" checked={gridSize === "small"} onChange={(event) => changeSize(event, 'grid')} /><label htmlFor='smallGrid'><i></i> <span>2 columns</span></label>
                         <input id="medGrid" type="radio" value="medium" name="postSize" checked={gridSize === "medium"} onChange={(event) => changeSize(event, 'grid')} /> <label htmlFor="medGrid"><i></i> <span>3 columns</span></label>
@@ -51,7 +51,7 @@ const PostOptions = () => {
                 :
                 <div className={`select-size posts`}>
                     <input id="smallPost" type="radio" value="small" name="postSize" checked={postSize === "small"} onChange={(event) => changeSize(event, 'post')} /> <label htmlFor='smallPost'><i></i> <span>400px</span></label>
-                    <input id="medPost" type="radio" value="medium" name="postSize" checked={postSize === "medium"} onChange={(event) => changeSize(event, 'post')} /> <label htmlFor="medPost"><i></i>  <span>500px</span></label>
+                    <input id="medPost" type="radio" value="medium" name="postSize" checked={postSize === "medium"} onChange={(event) => changeSize(event, 'post')} /> <label htmlFor="medPost"><i></i>  <span>540px</span></label>
                     <input id="largePost" type="radio" value="large" name="postSize" checked={postSize === "large"} onChange={(event) => changeSize(event, 'post')} />  <label htmlFor="largePost"><i></i> <span>700px</span></label>
                 </div>
             }

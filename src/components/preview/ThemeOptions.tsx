@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useContext } from "react";
 import { ThemeContext } from "../../App";
+import { Disclaimer } from "../Disclaimer";
 
 const ThemeOptions = () => {
 
@@ -36,7 +37,7 @@ const ThemeOptions = () => {
                 <option value="grid">Grid</option>
             </select>
             <label htmlFor='backgroundColor'>Title Location</label>
-            {!footer && !header && !sidebar ? <p className='disclaimer'>please enable a header, sidebar, or footer</p>
+            {!footer && !header && !sidebar ? <Disclaimer icon="fas fa-exclamation-triangle" words="please enable a sidebar, header, or footer" />
                 :
                 <select name="title" id="title" onChange={(event) => changeLocation(event, 'title')}>
                     <option>Select a location for your title</option>
@@ -46,16 +47,17 @@ const ThemeOptions = () => {
             }
             <label htmlFor='backgroundColor'>Description Location</label>
 
-            {!footer && !header && !sidebar ? <p className='disclaimer'>please enable a header, sidebar, or footer</p>
+            {!footer && !header && !sidebar ? <Disclaimer icon="fas fa-exclamation-triangle" words="please enable a sidebar, header, or footer" />
                 :
                 <select name="description" id="description" onChange={(event) => changeLocation(event, 'description')}>
                     <option>Select a location for your Description</option>
                     {sidebar && <option value="sidebar">Sidebar</option>}
                     {header && <option value="header">Header</option>}
-                    {footer && <option value="footer">Footer</option>}        </select>
+                    {footer && <option value="footer">Footer</option>}        
+                </select>
             }
             <label htmlFor='navLocation'>Navigation Location</label>
-            {!footer && !header && !sidebar ? <p className='disclaimer'>please enable a header, sidebar, or footer</p>
+            {!footer && !header && !sidebar ? <Disclaimer icon="fas fa-exclamation-triangle" words="please enable a sidebar, header, or footer" />
                 :
                 <select name="title" id="title" onChange={(event) => changeLocation(event, 'nav')}>
                     <option>Select a location for your main navigation</option>
