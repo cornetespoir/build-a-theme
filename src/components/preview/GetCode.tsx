@@ -108,6 +108,8 @@ const pages =
             {/block:Options}
             {NewPostStyles}
              <style>
+             @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+
                 * {
                     box-sizing: border-box;
                 }
@@ -123,7 +125,7 @@ const pages =
                     --posts: {color:posts};
                 }
                 body {
-                    font-family: sans-serif;
+                    font-family: Roboto, sans-serif;
                     margin: 0;
                     height: 100vh;
                     color: var(--text);
@@ -283,6 +285,10 @@ const pages =
                     display: inline-block;
                     margin-right: .4rem;
                     color: var(--text);
+                }
+
+                .reblogs a, .caption a {
+                    color:var(--accent);
                 }
 
                 .tumblr_audio_player {
