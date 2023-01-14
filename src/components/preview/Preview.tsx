@@ -35,14 +35,14 @@ const Preview = ({ className }: PreviewProps) => {
             {header &&
                 <Containers type='header' allowDelete>
                     {titleLocation === 'header' && <h1>Title</h1>}
-                    {descriptionLocation === 'header' && <div>Description</div>}
+                    {descriptionLocation === 'header' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
                     {navLocation === 'header' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                 </Containers>}
-            <main className={`sidebar-${sidebar} layout-${layout} ${layout === 'grid' && grid-${gridSize}} post-${postSize}`}>
+            <main className={`sidebar-${sidebar} layout-${layout} ${layout === 'grid' && `grid-${gridSize}`} post-${postSize}`}>
                 {sidebar &&
                     <aside className='sidebar' id='sidebar'>
                         {titleLocation === 'sidebar' && <h1>Title</h1>}
-                        {descriptionLocation === 'sidebar' && <div>Description</div>}
+                        {descriptionLocation === 'sidebar' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
                         {navLocation === 'sidebar' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
 
                     </aside>
@@ -77,7 +77,7 @@ const Preview = ({ className }: PreviewProps) => {
                 {footer &&
                     <Containers type='footer' allowDelete>
                         {titleLocation === 'footer' && <h1>Title</h1>}
-                        {descriptionLocation === 'footer' && <div>Description</div>}
+                        {descriptionLocation === 'footer' && <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>}
                         {navLocation === 'footer' && <div className='link-container'><a href="/">Home</a> <a href="/">Ask</a> <a href="/">Archive</a></div>}
                     </Containers>}
         </div>

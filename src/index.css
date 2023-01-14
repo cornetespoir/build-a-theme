@@ -179,6 +179,10 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+a {
+  color: black;
+}
+
 .tarea {
   margin: 0;
   padding: calc(var(--spacing) / 2);
