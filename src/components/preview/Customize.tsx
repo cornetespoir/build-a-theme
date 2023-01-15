@@ -20,7 +20,7 @@ return (
         <ThemeOptions />
         <PostOptions />
         {sidebar &&  <SidebarStyles />}
-        <button onClick={toggleModal}><i className="fas fa-laptop-code"></i> Start using this theme</button>
+        <button className='open-code' onClick={toggleModal}><i className="fas fa-laptop-code"></i> Start using this theme</button>
         <Modal show={showModal} closeModal={toggleModal}>
             <GetCode/>
         </Modal>

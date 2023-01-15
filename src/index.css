@@ -454,7 +454,23 @@ button {
 
 button.clip {
   margin: 0 var(--spacing);
-  padding: calc(var(--spacing) / 2)
+  padding: calc(var(--spacing));
+  background:transparent;
+  border:0;
+  font-size:1rem;
+  border-radius:.6rem;
+  color:white;
+  border:2px solid var(--porple);
+
+  box-shadow:0 0 0 0 var(--porple);
+}
+button.clip:hover {
+  background:var(--porple);
+}
+button.clip:focus {
+  transition:.6s;
+  box-shadow: 0 0 0 1rem transparent;
+
 }
 
 .clipboard {
@@ -769,4 +785,30 @@ select {
 
 .select-size {
   margin-bottom:calc(var(--spacing) * 2);
+}
+
+.open-code {
+  padding:var(--spacing);
+  display:block;
+  width:100%;
+  border:0;
+  color:white;
+  border-radius:.6rem;
+  font-size:1rem;
+  border:2px solid var(--porple);
+  transition:.6s;
+  background:transparent;
+  box-shadow: inset 0em 0em 0 4em transparent, 0 0 0 .4em transparent;
+
+}
+
+.open-code:hover {
+  animation: zoom .6s;
+  background:var(--porple)
+}
+
+@keyframes zoom {
+  0% {
+    box-shadow: inset 0 0 0 0 var(--porple), 0 0 0 0 var(--porple);
+  }
 }
