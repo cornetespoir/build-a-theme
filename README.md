@@ -36,7 +36,7 @@ Future updates will include:
 - day/night mode
 - more layout options (fansites, portfolio themes, etc)
 
-You can fill out [the theme builder survey](https://href.li/?https://forms.gle/KDScN33F78BE5Gwm7) if you want to suggest a feature that isn't currently in this theme builder. 
+You can fill out [the theme builder survey](https://href.li/?https://forms.gle/KDScN33F78BE5Gwm7) if you want to suggest a feature that isn't currently in this theme builder. Keep in mind this project is not intended to replace fully released themes. This is a starting point, so the layout options are still going to be relatively limited compared to what's out there already!
 
 ## How does it work?
 
