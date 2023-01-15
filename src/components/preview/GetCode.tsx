@@ -3,11 +3,16 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const { sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const { searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
     const side = document.getElementById('sidebarBg') as HTMLInputElement
+
+    const search = `
+        <form action="/search" method="get" id="search-form">
+            <input type="text" name="q" class="query" value="" placeholder="Search">
+        </form>`
 
     const title =
         `
@@ -25,7 +30,7 @@ const GetCode = () => {
         `
     const nav =
         `
-           <div class="nav-container">
+            <div class="nav-container">
                 <a href="/">{lang:Home}</a>
                 {block:askenabled}
                 <a href="/ask">Ask</a>
@@ -34,7 +39,7 @@ const GetCode = () => {
                 <a href="/submit">Submit</a>
                 {/block:submissionsenabled}
                 <a href="/archive">Archive</a>
-           </div> 
+            </div> 
         ` 
 
 
@@ -97,12 +102,23 @@ const GetCode = () => {
             <meta name="color:background" content="#fff"/>
             <meta name="color:posts" content="#fff"/>
             <meta name="color:text" content="#000"/>
-            <meta name="color:borders" content="#ddd"/>
-            <!-- text -->
+            <meta name="color:borders" content="#ddd"/>`}
+            {layout === 'contained' ? `
+            <meta name="color:container background" content="#fff"/>
+             `: ''}
+            {`<!-- text -->
             <meta name="text:border width" content="1px"/>
             <meta name="text:border radius" content="4px"/>
             <!-- images -->
-            <meta name="image:background" content=""/>
+            <meta name="image:background" content=""/>`}
+            {sideImage !== 'default' ? `
+            <meta name="image:side image" content=""/>` : ''}
+            {customCursor ? `
+            <meta name="image:custom cursor" content=""/>` :''}
+              {layout === 'contained' ? `
+            <meta name="image:container background" content=""/>
+             `: ''}
+           {`
             <!-- boolean -->
             <meta name="if:full background" content=""/>
 
@@ -136,12 +152,46 @@ const GetCode = () => {
                     background-size: cover;
                     background-attachment: fixed;
                     {/block:iffullbackground}
+                    ${customCursor ? `cursor:url({image:custom cursor}), auto;` : ``}
                 }
 
+                ${sideImage === 'left' ? `
+                #side-image {position:fixed; left: var(--spacing); bottom: var(--spacing);}
+                `: sideImage === 'right' ? `
+                #side-image {position:fixed; right: var(--spacing); bottom: var(--spacing);}
+                ` : ``}
+                ${sideImage !== 'default' ? `
+                #side-image img {
+                    max-width:350px;
+                }` :''
+                }
                 a {
                     color: var(--text);
                 }
 
+                `}
+                {header ? `
+                header {
+                    margin:var(--spacing) auto;
+                    max-width:1100px;
+                    padding:var(--spacing);
+                    background:var(--posts);
+                    border: var(--border-width) solid var(--borders);
+                    border-radius:var(--border-radius);
+                }
+                `: ``}
+                 {header ? `
+                footer {
+                    width:100%;
+                    margin:var(--spacing) auto;
+                    max-width:1100px;
+                    padding:var(--spacing);
+                    background:var(--posts);
+                    border: var(--border-width) solid var(--borders);
+                    border-radius:var(--border-radius);
+                }
+                `: ``}
+                {`
                 article a {
                     text-decoration: none;
                 }
@@ -158,7 +208,7 @@ const GetCode = () => {
                 }
 
                 main {
-                    max-width:1200px;
+                    max-width:1100px;
                     margin:auto;
                 }
 
@@ -199,6 +249,7 @@ const GetCode = () => {
                 .contained main {
                     height: 70vh;
                     overflow: auto;
+                    ${layout === 'contained' ? `background: {color:container background} url({image:container background})` :''}
                 }
 
 
@@ -206,16 +257,20 @@ const GetCode = () => {
                     max-width: 500px;
                 }
 
+                .grid main {
+                    max-width: 98%;
+                }
+
                 .grid section {
                     column-count: ${gridSize === 'medium' ? '3' : '2'};
-                    break-inside:avoid;
-                    grid-gap:calc(var(--spacing) * 2);
+                    break-inside: avoid;
+                    grid-gap: ${gridSize === 'small' ? 'calc(var(--spacing) * 2)' : 'var(--spacing)'};
                     margin-bottom:var(--spacing);
                 }
 
                 .grid article {
                     display: inline-block;
-                    max-width:calc(100% - var(--spacing));
+                    max-width: ${gridSize === 'small' ? 'calc(100% - var(--spacing))' : 'calc(100% - (var(--spacing) / 2))'};
                     margin: var(--spacing) 0;
                 }
 
@@ -229,10 +284,19 @@ const GetCode = () => {
                 }
 
                 .description, aside h2 {
-                    padding: var(--spacing) 0;
+                    padding: calc(var(--spacing) /2) 0;
                     margin: 0;
-                }
-
+                }`}
+                {searchBar !== '' ? `
+                 #search-form input {
+                    padding: calc(var(--spacing) / 2);
+                    width:100%;
+                    margin: calc(var(--spacing) /2) 0 0 0;
+                    border:var(--border-width) solid var(--borders);
+                    border-radius:var(--border-radius);
+                 }
+                ` :``}
+                {`
                 .post-info, .like-and-reblog, .contained {
                     display: flex;
                     flex-wrap: wrap;
@@ -269,6 +333,7 @@ const GetCode = () => {
                 .sidebar-style-bubble {
                     padding: 0;
                     border: 0;
+                    background:transparent;
                 }
                 
                 .bubble {
@@ -281,9 +346,14 @@ const GetCode = () => {
                     border:var(--border-width) solid var(--borders);
                     padding: var(--spacing);
                     width:100%;
+                    background:var(--posts);
                     border-radius:.6rem;
                     border-top-left-radius:0;
                     margin:var(--spacing) 0;
+                }
+
+                .header-image {
+                    margin-bottom: 24px!important;
                 }
                 
                 .sidebar-style-bubble img {
@@ -322,10 +392,10 @@ const GetCode = () => {
                     position: relative;
                     {block:ShowHeaderImage}
                     display:flex;
+                    width:100%;
                     justify-content:center;
-                    background: var(--headerimage);
-                    aspect-ratio: 4/1;
-                    background-attachment: fixed;
+                    background: var(--headerimage) center center;
+                    aspect-ratio: 3/1;
                     background-size:cover;
                     {/block:ShowHeaderImage}
                 }` : `
@@ -350,6 +420,12 @@ const GetCode = () => {
                     display: inline-block;
                     margin-right: .4rem;
                     color: var(--text);
+                    text-decoration:none;
+                }
+
+                .pages-container a {
+                    font-weight:bold;
+                    color:var(--accent);
                 }
 
                 .reblogs a, .caption a {
@@ -370,7 +446,13 @@ const GetCode = () => {
                         max-width:100%;
                         height: auto;
                         position:relative;
-                    }` : ``}
+                    }
+                    .sidebar-container {
+                        max-width:90%;
+                        margin:var(--spacing) auto;
+                    }
+                    ` : ``}
+                    ${sideImage !== 'default' ? `#side-image {display: none;}` : ''}
                     .grid section {
                         column-count: 1;
                     }
@@ -381,11 +463,13 @@ const GetCode = () => {
         </head>
         <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
         `}
+            {sideImage !== 'default' ? `<div id="side-image"><img src="{image:side image}"></div>` : ``}
                         {header ? <>
                             {`  <header>`}
                             {titleLocation === 'header' ? title : ''}
                             {descriptionLocation === 'header' ? description : ''}
                             {navLocation === 'header' ? nav + pages : ''}
+                            {searchBar === 'header' ? search : ''}
                             {`</header>
                 `} </> : ''}
                         {`<main>`}
@@ -396,7 +480,7 @@ const GetCode = () => {
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                {`<div class="header-image"><img src="{PortraitURL-128}"></div>`}
+                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''}<img src="{PortraitURL-128}"></div>`}
                                 {titleLocation === 'sidebar' ? title : ''}
                                 {descriptionLocation === 'sidebar' ? description : ''}
                                 {navLocation === 'sidebar' ? nav + pages : ''}
@@ -404,11 +488,12 @@ const GetCode = () => {
                                 : sidebarStyle === 'bubble' ?
                                     <>
                                         {`<div class="bubble">
-                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@username</a>
+                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@{name}</a>
                                     <div class="bubble-desc">`}
                                         {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
                                         {navLocation === 'sidebar' ? pages : ''}
+                                        {searchBar === 'sidebar' ? search : ''}
                                         {`</div>`}
                                         {navLocation === 'sidebar' ? nav : ''} 
                                 {`</div>`}
@@ -417,6 +502,7 @@ const GetCode = () => {
                                         {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
                                         {navLocation === 'sidebar' ? nav : ''}
+                                        {searchBar === 'sidebar' ? search : ''}
                                     </>
                             }
                             {`
@@ -425,7 +511,6 @@ const GetCode = () => {
                     {`
                 <section>
                     {block:Posts}
-                    <!-- this removes the default source/via links  -->
                     <!-- {block:NoRebloggedFrom}
                     {block:RebloggedFrom}{ReblogParentName}{/block:RebloggedFrom}
                     {/block:NoRebloggedFrom} -->
@@ -443,7 +528,7 @@ const GetCode = () => {
                                     : ''}
                                 </div>{/block:Date}`)
                                 : ''}  
-                        <!-- photo, photoset, and panorama posts -->           
+      
                                 {block:Photo}
                                     <img src="{PhotoURL-HighRes}" alt="{photoalt}" class="photos">
                                 {/block:Photo}
@@ -455,8 +540,7 @@ const GetCode = () => {
                                 {block:Panorama}
                                     <img src="{photourl-panorama}" alt="{photoalt}">
                                 {/block:Panorama}
-                                
-                        <!-- quote posts -->            
+                                         
                                 {block:Quote}
                                     <div class="quote-container">
                                         <div class="quote">
@@ -467,8 +551,7 @@ const GetCode = () => {
                                         </div>
                                     </div>
                                 {/block:Quote}
-                                
-                        <!-- chat posts -->            
+                                          
                                 {block:Chat}
                                     <ul class="chat">
                                         {block:Lines}
@@ -480,7 +563,6 @@ const GetCode = () => {
                                     </ul>
                                 {/block:Chat}
 
-                        <!-- link posts -->
                                 {block:link}
                                     <div class="link">
                                         <a href="{URL}">
@@ -488,8 +570,7 @@ const GetCode = () => {
                                         </a>
                                     </div>
                                 {/block:link}
-                                    
-                        <!-- vidoe and audio -->            
+                                              
                                 {block:Video}
                                     {Video-700}
                                 {/block:Video}
@@ -497,8 +578,7 @@ const GetCode = () => {
                                 {block:Audio}
                                     {audioembed}
                                 {/block:Audio}
-                                
-                        <!-- Answer posts -->            
+         
                                 {block:Answer}
                                     <div class="question">
                                         {Asker}: {Question}
@@ -565,7 +645,7 @@ const GetCode = () => {
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                {`<div class="header-image"><img src="{PortraitURL-128}"></div>`}
+                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''}<img src="{PortraitURL-128}"></div>`}
                                 {titleLocation === 'sidebar' ? title : ''}
                                 {descriptionLocation === 'sidebar' ? description : ''}
                                 {navLocation === 'sidebar' ? nav + pages : ''}
@@ -573,11 +653,12 @@ const GetCode = () => {
                                 : sidebarStyle === 'bubble' ?
                                     <>
                                         {`<div class="bubble">
-                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@username</a>
+                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@{name}</a>
                                     <div class="bubble-desc">`}
                                         {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
                                         {navLocation === 'sidebar' ? pages : ''}
+                                        {searchBar === 'sidebar' ? search : ''}
                                         {`</div>`}
                                         {navLocation === 'sidebar' ? nav : ''} 
                                 {`</div>`}
@@ -586,6 +667,7 @@ const GetCode = () => {
                                         {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
                                         {navLocation === 'sidebar' ? nav : ''}
+                                        {searchBar === 'sidebar' ? search : ''}
                                     </>
                             }
                             {`
@@ -618,6 +700,7 @@ const GetCode = () => {
                 ${titleLocation === 'footer' ? title : ''}
                 ${descriptionLocation === 'footer' ? description : ''}
                 ${navLocation === 'footer' ? nav : ''}
+                ${searchBar === 'footer' ? search : ''}
                 </footer>` : ''}
                 </body>
             </main>

@@ -21,11 +21,13 @@ function App() {
   const [sidebarLocation, setSidebarLocation] = useState(false)
   const [sideImage, setSideImage] = useState('default')
   const [updatesTab, setUpdatesTab] = useState('default')
+  const [customCursor, setCustomCursor] = useState(false)
+  const [searchBar, setSearchBar] = useState('')
 
-  const initalStates = {sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
+  const initalStates = {customCursor, setCustomCursor, sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
     sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, 
     setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, 
-    footer, setFooter, titleLocation, setTitleLocation, layout, setLayout }
+    footer, setFooter, titleLocation, setTitleLocation, layout, setLayout, searchBar, setSearchBar }
 
   return (
     <div className="App">

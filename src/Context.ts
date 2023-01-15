@@ -33,6 +33,10 @@ export interface layoutContext {
     setSideImage: Dispatch<SetStateAction<string>>,
     updatesTab: string,
     setUpdatesTab: Dispatch<SetStateAction<string>>,
+    searchBar: string,
+    setSearchBar: Dispatch<SetStateAction<string>>,
+    customCursor: boolean,
+    setCustomCursor: Dispatch<SetStateAction<boolean>>,
   }
   
   export const initialValues = {
@@ -68,4 +72,8 @@ export interface layoutContext {
     setSideImage: () => { },
     updatesTab: '',
     setUpdatesTab: () => { },
+    searchBar: '',
+    setSearchBar: () => { },
+    customCursor: false,
+    setCustomCursor: () => { },
   }
