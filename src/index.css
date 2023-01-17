@@ -962,3 +962,34 @@ select {
     height: 10px;
   }
 }
+
+
+#daynight-toggle {
+  cursor:pointer;
+  position:fixed;
+  top:var(--spacing);
+  left:var(--spacing);
+  z-index:2;
+  height:2rem;
+  width:2rem;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  border:var(--border-width) solid var(--borders);
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+}
+
+#daynight-toggle:before {
+  content:'☀';
+}
+
+#daynight-toggle.night-mode-toggle:before {
+content:'';
+width:1rem;
+height:1rem;
+transform:translate(-.32rem, -.32rem);
+border-radius: 50%;
+box-shadow: .32rem .32rem 0 0 black;
+}

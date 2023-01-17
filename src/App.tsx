@@ -23,11 +23,12 @@ function App() {
   const [updatesTab, setUpdatesTab] = useState('default')
   const [customCursor, setCustomCursor] = useState(false)
   const [searchBar, setSearchBar] = useState('')
+  const [daynight, setdaynight] = useState(false)
 
   const initalStates = {customCursor, setCustomCursor, sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
     sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, 
     setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, 
-    footer, setFooter, titleLocation, setTitleLocation, layout, setLayout, searchBar, setSearchBar }
+    daynight, setdaynight, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout, searchBar, setSearchBar }
 
   return (
     <div className="App">

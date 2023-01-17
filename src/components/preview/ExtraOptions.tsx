@@ -9,7 +9,7 @@ import { Disclaimer } from "../Disclaimer";
 
 const ExtraOptions = () => {
     /* add to context */
-    const { setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
+    const { daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
     const [active, setActive] = useState('')
     function sideImageLocation(location: string) {
         if (location === 'right') {
@@ -27,6 +27,10 @@ const ExtraOptions = () => {
 
     function addCursor() {
         setCustomCursor(!customCursor)
+    }
+
+    function addDayNight() {
+        setdaynight(!daynight)
     }
 
     function searchLocation(event: ChangeEvent<HTMLSelectElement>) {
@@ -76,7 +80,20 @@ const ExtraOptions = () => {
                                     {header && <option value="header">Header</option>}
                                     {footer && <option value="footer">Footer</option>}        </select>
                             }
-                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div className='side-image-option'>
+                <div className="flex">
+                    <label>Add day/night toggle button</label>
+                    <button className={`toggle-button toggle-${daynight}`} onClick={addDayNight}>Toggle Day/Night mode</button>
+                    {daynight &&
+                    <div className='flex half'>
+                    <label className='half'>Day/Night mode added!</label>
+                    <p className='disclaimer'>Also comes with an option to remove background images in night mode. Not visible in preview</p>
+                    </div>
                     }
                 </div>
             </div>
@@ -87,7 +104,6 @@ const ExtraOptions = () => {
                     <button className={`toggle-button toggle-${sideImage !== 'default'}`} onClick={sideImageToggle}>Toggle Side Image</button>
                     {sideImage !== 'default' &&
                         <>
-
                             <div className='flex half'>
                                 <label className='half'>Side Image</label>
                                 <div className={`info-switch sidebar-info-switch ${active}-active`}>
@@ -102,8 +118,6 @@ const ExtraOptions = () => {
                     }
                 </div>
             </div>
-
-
             <div className='flex cursor'>
                 <input type="checkbox" id="customCursor" name="customCursorCheck" value="True" checked={customCursor} onChange={addCursor} />
                 <label htmlFor="customCursor"><span></span> Custom Cursor</label>

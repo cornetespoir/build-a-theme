@@ -37,6 +37,8 @@ export interface layoutContext {
     setSearchBar: Dispatch<SetStateAction<string>>,
     customCursor: boolean,
     setCustomCursor: Dispatch<SetStateAction<boolean>>,
+    daynight: boolean,
+    setdaynight: Dispatch<SetStateAction<boolean>>,
   }
   
   export const initialValues = {
@@ -76,4 +78,6 @@ export interface layoutContext {
     setSearchBar: () => { },
     customCursor: false,
     setCustomCursor: () => { },
+    daynight: false,
+    setdaynight: () => { },
   }

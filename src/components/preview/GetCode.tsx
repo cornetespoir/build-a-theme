@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const { searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const {daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
@@ -106,10 +106,8 @@ const GetCode = () => {
             {layout === 'contained' ? `
             <meta name="color:container background" content="#fff"/>
              `: ''}
-            {`<!-- text -->
-            <meta name="text:border width" content="1px"/>
+            {`<meta name="text:border width" content="1px"/>
             <meta name="text:border radius" content="4px"/>
-            <!-- images -->
             <meta name="image:background" content=""/>`}
             {sideImage !== 'default' ? `
             <meta name="image:side image" content=""/>` : ''}
@@ -118,12 +116,23 @@ const GetCode = () => {
               {layout === 'contained' ? `
             <meta name="image:container background" content=""/>
              `: ''}
+             {daynight ? `
+            <meta name="if:Remove background image in night mode" content=""/>` :``}
            {`
-            <!-- boolean -->
             <meta name="if:full background" content=""/>
-
             {/block:Options}
+
             {NewPostStyles}
+            ${daynight ? `
+            <script>
+                const themed = localStorage.getItem('night-mode');
+                if (themed === "enabled") {
+                    sessionStorage.setItem('night-mode', 'enabled');
+                    document.documentElement.classList.add('night-mode-theme');
+                }
+            </script>
+            <script src="https://static.tumblr.com/svdghan/gFJrolu7g/daynight.js"></script>
+            `:``}
              <style>
              @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
 
@@ -142,15 +151,25 @@ const GetCode = () => {
                     --posts: {color:posts};
                     --headerimage: url({HeaderImage});
                 }
+                ${daynight ? `
+                .night-mode-theme {
+                    --background: #000!important;
+                    --accent: var(--night-mode-accent);
+                    {block:ifRemoveBackgroundImageInNightMode}
+                    --background-image: url('');
+                    {/block:ifRemoveBackgroundImageInNightMode}
+                    --text: white;
+                    --posts: #222;
+                }
+                `:``}
                 body {
                     font-family: Roboto, sans-serif;
                     margin: 0;
                     height: 100vh;
                     color: var(--text);
-                    background: var(--background) var(--background-image);
+                    background: var(--background) var(--background-image) center center fixed;
                     {block:iffullbackground}
                     background-size: cover;
-                    background-attachment: fixed;
                     {/block:iffullbackground}
                     ${customCursor ? `cursor:url({image:custom cursor}), auto;` : ``}
                 }
@@ -312,7 +331,7 @@ const GetCode = () => {
                 }
 
                 .sidebar-container {
-                    background: ${sideBg};
+                    background: var(--posts);
                     margin: calc(var(--spacing) * 4) auto 0 auto;
                     border: var(--border-width) solid var(--borders);
                     padding:var(--spacing);
@@ -458,11 +477,57 @@ const GetCode = () => {
                     }
 
                 }
+
+                .screen-reader {
+                    border: 0;
+                    clip: rect(1px, 1px, 1px, 1px);
+                    clip-path: inset(50%);
+                    height: 1px;
+                    margin: -1px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    width: 1px;
+                    word-wrap: normal !important;
+                }
+                ${daynight ?`
+                #daynight-toggle {
+                    cursor:pointer;
+                    background:;
+                    position:fixed;
+                    top:var(--spacing);
+                    left:var(--spacing);
+                    z-index:2;
+                    height:2rem;
+                    width:2rem;
+                    border-radius:50%;
+                    background:white;
+                    display:flex;
+                    border:var(--border-width) solid var(--borders);
+                    flex-wrap:wrap;
+                    justify-content:center;
+                    align-items:center;
+                }
+                
+                #daynight-toggle:before {
+                    content:'☀';
+                }
+                
+                #daynight-toggle.night-mode-toggle:before {
+                  content:'';
+                  width:1rem;
+                  height:1rem;
+                  transform:translate(-.32rem, -.32rem);
+                  border-radius: 50%;
+                  box-shadow: .32rem .32rem 0 0 black;
+                }
+                ` :``}
                 {CustomCSS}
             </style>
         </head>
         <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
         `}
+        {daynight ? `<button id="daynight-toggle"><span class="screen-reader">toggle day and night mode</span></button>` : ``}
             {sideImage !== 'default' ? `<div id="side-image"><img src="{image:side image}"></div>` : ``}
                         {header ? <>
                             {`  <header>`}
@@ -701,7 +766,7 @@ const GetCode = () => {
                 ${descriptionLocation === 'footer' ? description : ''}
                 ${navLocation === 'footer' ? nav : ''}
                 ${searchBar === 'footer' ? search : ''}
-                </footer>` : ''}
+                </footer>` : ``}
                 </body>
             </main>
         </html>
