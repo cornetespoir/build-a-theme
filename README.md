@@ -1,5 +1,6 @@
 # a theme builder for Tumblr themes
 > beta version
+> newest update: day/night mode toggle!
 
 ## What is this for?
 
@@ -17,6 +18,7 @@ Currently the theme builder supports these features:
 - optional custom cursors
 - optional transparent side images
 - optional search bar
+- optional day/night mode toggle
 
 All themes made with the theme builder come with:
 - custom color options
@@ -33,7 +35,6 @@ All themes made with the theme builder come with:
 Since this is a beta release, more options are coming! 
 Future updates will include:
 - Header and footer style options
-- day/night mode
 - more layout options (fansites, portfolio themes, etc)
 
 You can fill out [the theme builder survey](https://href.li/?https://forms.gle/KDScN33F78BE5Gwm7) if you want to suggest a feature that isn't currently in this theme builder. Keep in mind this project is not intended to replace fully released themes. This is a starting point, so the layout options are still going to be relatively limited compared to what's out there already!
