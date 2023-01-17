@@ -15,13 +15,11 @@ const ExtraOptions = () => {
         if (location === 'right') {
             setSideImage('right')
             setActive(location)
-            console.log(sideImage)
         }
 
         else {
             setSideImage('left')
             setActive(location)
-            console.log(sideImage)
         }
     }
 

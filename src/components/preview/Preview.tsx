@@ -25,9 +25,7 @@ const Preview = ({ className }: PreviewProps) => {
         const element = event.currentTarget as HTMLInputElement
         const value = element.value
         setPostType(value)
-        console.log(searchBar);
     }
-
 
     return (
         <div id='preview-frame'>
