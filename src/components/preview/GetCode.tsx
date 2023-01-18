@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const {daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const { daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
     const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
@@ -40,7 +40,7 @@ const GetCode = () => {
                 {/block:submissionsenabled}
                 <a href="/archive">Archive</a>
             </div> 
-        ` 
+        `
 
 
     const description = `<div class="description">{Description}</div>`
@@ -103,22 +103,22 @@ const GetCode = () => {
             <meta name="color:posts" content="#fff"/>
             <meta name="color:text" content="#000"/>
             <meta name="color:borders" content="#ddd"/>`}
-            {layout === 'contained' ? `
+                        {layout === 'contained' ? `
             <meta name="color:container background" content="#fff"/>
              `: ''}
-            {`<meta name="text:border width" content="1px"/>
+                        {`<meta name="text:border width" content="1px"/>
             <meta name="text:border radius" content="4px"/>
             <meta name="image:background" content=""/>`}
-            {sideImage !== 'default' ? `
+                        {sideImage !== 'default' ? `
             <meta name="image:side image" content=""/>` : ''}
-            {customCursor ? `
-            <meta name="image:custom cursor" content=""/>` :''}
-              {layout === 'contained' ? `
+                        {customCursor ? `
+            <meta name="image:custom cursor" content=""/>` : ''}
+                        {layout === 'contained' ? `
             <meta name="image:container background" content=""/>
              `: ''}
-             {daynight ? `
-            <meta name="if:Remove background image in night mode" content=""/>` :``}
-           {`
+                        {daynight ? `
+            <meta name="if:Remove background image in night mode" content=""/>` : ``}
+                        {`
             <meta name="if:full background" content=""/>
             {/block:Options}
 
@@ -132,7 +132,7 @@ const GetCode = () => {
                 }
             </script>
             <script src="https://static.tumblr.com/svdghan/gFJrolu7g/daynight.js"></script>
-            `:``}
+            `: ``}
              <style>
              @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
 
@@ -161,7 +161,7 @@ const GetCode = () => {
                     --text: white;
                     --posts: #222;
                 }
-                `:``}
+                `: ``}
                 body {
                     font-family: Roboto, sans-serif;
                     margin: 0;
@@ -182,14 +182,14 @@ const GetCode = () => {
                 ${sideImage !== 'default' ? `
                 #side-image img {
                     max-width:350px;
-                }` :''
-                }
+                }` : ''
+                            }
                 a {
                     color: var(--text);
                 }
 
                 `}
-                {header ? `
+                        {header ? `
                 header {
                     margin:var(--spacing) auto;
                     max-width:1100px;
@@ -199,7 +199,7 @@ const GetCode = () => {
                     border-radius:var(--border-radius);
                 }
                 `: ``}
-                 {header ? `
+                        {header ? `
                 footer {
                     width:100%;
                     margin:var(--spacing) auto;
@@ -210,7 +210,7 @@ const GetCode = () => {
                     border-radius:var(--border-radius);
                 }
                 `: ``}
-                {`
+                        {`
                 article a {
                     text-decoration: none;
                 }
@@ -262,13 +262,13 @@ const GetCode = () => {
                 }
 
                 .contained header {
-                    margin-bototm: 0;
+                    margin-bottom: 0;
                     padding: var(--spacing);
                 }
                 .contained main {
                     height: 70vh;
                     overflow: auto;
-                    ${layout === 'contained' ? `background: {color:container background} url({image:container background})` :''}
+                    ${layout === 'contained' ? `background: {color:container background} url({image:container background})` : ''}
                 }
 
 
@@ -306,7 +306,7 @@ const GetCode = () => {
                     padding: calc(var(--spacing) /2) 0;
                     margin: 0;
                 }`}
-                {searchBar !== '' ? `
+                        {searchBar !== '' ? `
                  #search-form input {
                     padding: calc(var(--spacing) / 2);
                     width:100%;
@@ -314,8 +314,8 @@ const GetCode = () => {
                     border:var(--border-width) solid var(--borders);
                     border-radius:var(--border-radius);
                  }
-                ` :``}
-                {`
+                ` : ``}
+                        {`
                 .post-info, .like-and-reblog, .contained {
                     display: flex;
                     flex-wrap: wrap;
@@ -490,7 +490,7 @@ const GetCode = () => {
                     width: 1px;
                     word-wrap: normal !important;
                 }
-                ${daynight ?`
+                ${daynight ? `
                 #daynight-toggle {
                     cursor:pointer;
                     background:;
@@ -521,14 +521,14 @@ const GetCode = () => {
                   border-radius: 50%;
                   box-shadow: .32rem .32rem 0 0 black;
                 }
-                ` :``}
+                ` : ``}
                 {CustomCSS}
             </style>
         </head>
         <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
         `}
-        {daynight ? `<button id="daynight-toggle"><span class="screen-reader">toggle day and night mode</span></button>` : ``}
-            {sideImage !== 'default' ? `<div id="side-image"><img src="{image:side image}"></div>` : ``}
+                        {daynight ? `<button id="daynight-toggle"><span class="screen-reader">toggle day and night mode</span></button>` : ``}
+                        {sideImage !== 'default' ? `<div id="side-image"><img src="{image:side image}"></div>` : ``}
                         {header ? <>
                             {`  <header>`}
                             {titleLocation === 'header' ? title : ''}
@@ -539,16 +539,16 @@ const GetCode = () => {
                 `} </> : ''}
                         {`<main>`}
                         {sidebar && !sidebarLocation ? (<>
-            {`
+                            {`
             <aside>
                 <div class="sidebar-container sidebar-style-${sidebarStyle}">
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''}<img src="{PortraitURL-128}"></div>`}
-                                {titleLocation === 'sidebar' ? title : ''}
-                                {descriptionLocation === 'sidebar' ? description : ''}
-                                {navLocation === 'sidebar' ? nav + pages : ''}
+                                    {`<div class="header-image">${searchBar === 'sidebar' ? search : ''}<img src="{PortraitURL-128}"></div>`}
+                                    {titleLocation === 'sidebar' ? title : ''}
+                                    {descriptionLocation === 'sidebar' ? description : ''}
+                                    {navLocation === 'sidebar' ? nav + pages : ''}
                                 </>
                                 : sidebarStyle === 'bubble' ?
                                     <>
@@ -560,8 +560,8 @@ const GetCode = () => {
                                         {navLocation === 'sidebar' ? pages : ''}
                                         {searchBar === 'sidebar' ? search : ''}
                                         {`</div>`}
-                                        {navLocation === 'sidebar' ? nav : ''} 
-                                {`</div>`}
+                                        {navLocation === 'sidebar' ? nav : ''}
+                                        {`</div>`}
                                     </>
                                     : <>
                                         {titleLocation === 'sidebar' ? title : ''}
@@ -573,7 +573,7 @@ const GetCode = () => {
                             {`
                         </div>
                 </aside>`}</>) : ''}
-                    {`
+                        {`
                 <section>
                     {block:Posts}
                     <!-- {block:NoRebloggedFrom}
@@ -703,17 +703,17 @@ const GetCode = () => {
                     </article>
                     {/block:Posts}
                 </section>`}
-                {sidebar && sidebarLocation ? (<>
-            {`
+                        {sidebar && sidebarLocation ? (<>
+                            {`
             <aside>
                 <div class="sidebar-container sidebar-style-${sidebarStyle}">
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''}<img src="{PortraitURL-128}"></div>`}
-                                {titleLocation === 'sidebar' ? title : ''}
-                                {descriptionLocation === 'sidebar' ? description : ''}
-                                {navLocation === 'sidebar' ? nav + pages : ''}
+                                    {`<div class="header-image">${searchBar === 'sidebar' ? search : ''}<img src="{PortraitURL-128}"></div>`}
+                                    {titleLocation === 'sidebar' ? title : ''}
+                                    {descriptionLocation === 'sidebar' ? description : ''}
+                                    {navLocation === 'sidebar' ? nav + pages : ''}
                                 </>
                                 : sidebarStyle === 'bubble' ?
                                     <>
@@ -725,8 +725,8 @@ const GetCode = () => {
                                         {navLocation === 'sidebar' ? pages : ''}
                                         {searchBar === 'sidebar' ? search : ''}
                                         {`</div>`}
-                                        {navLocation === 'sidebar' ? nav : ''} 
-                                {`</div>`}
+                                        {navLocation === 'sidebar' ? nav : ''}
+                                        {`</div>`}
                                     </>
                                     : <>
                                         {titleLocation === 'sidebar' ? title : ''}
@@ -738,7 +738,7 @@ const GetCode = () => {
                             {`
                         </div>
                 </aside>`}</>) : ''}
-                {`
+                        {`
                 {block:Pagination}
                 <div class="pagination flex centered">
                     {block:previouspage}
