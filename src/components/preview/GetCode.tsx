@@ -5,7 +5,6 @@ const GetCode = () => {
 
     const {daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
 
-    const [sideBg, setsideBg] = useState('#fff');
     const [pop, setPop] = useState(false);
     const side = document.getElementById('sidebarBg') as HTMLInputElement
 
@@ -41,13 +40,8 @@ const GetCode = () => {
                 <a href="/archive">Archive</a>
             </div> 
         ` 
-        
-    const description = `<div class="description">{Description}</div>`
 
-    useEffect(() => {
-        if (side != null)
-            setsideBg(side.value)
-    }, [sidebar, side])
+    const description = `<div class="description">{Description}</div>`
 
     const codeRef = useRef<HTMLPreElement>(null)
     const copyCode = async () => {

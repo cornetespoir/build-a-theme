@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../App";
 import { setLocalStorage, useLocalStorage } from "../../hooks/useLocalStorage";
 
