@@ -41,8 +41,7 @@ const GetCode = () => {
                 <a href="/archive">Archive</a>
             </div> 
         ` 
-
-
+        
     const description = `<div class="description">{Description}</div>`
 
     useEffect(() => {
@@ -90,7 +89,7 @@ const GetCode = () => {
                 <code>
                     <pre ref={codeRef}>
                         {`<!DOCTYPE html>
-    <!-- A custom theme built by eggdesign's theme builder -->
+    <!-- A custom theme built by eggdesign's theme builder (buildatheme.tumblr.com) -->
     <html> 
         <head>
             <title>{Title}</title>
@@ -117,6 +116,7 @@ const GetCode = () => {
             <meta name="image:container background" content=""/>
              `: ''}
              {daynight ? `
+            <meta name="color:night mode accent" content="" />
             <meta name="if:Remove background image in night mode" content=""/>` :``}
            {`
             <meta name="if:full background" content=""/>
@@ -140,8 +140,8 @@ const GetCode = () => {
                     box-sizing: border-box;
                 }
                 :root {
-                    --background: {color:background};
                     --background-image:  url({image:background});
+                    --background: {color:background};
                     --accent: {AccentColor};
                     --text: {color:text};
                     --borders: {color:borders};
@@ -150,6 +150,10 @@ const GetCode = () => {
                     --border-radius: {text:border radius};
                     --posts: {color:posts};
                     --headerimage: url({HeaderImage});
+                    ${daynight ?`
+                    --invert: invert(0);
+                    --night-mode-accent: {color:night mode accent};
+                    ` :``}
                 }
                 ${daynight ? `
                 .night-mode-theme {
@@ -160,6 +164,7 @@ const GetCode = () => {
                     {/block:ifRemoveBackgroundImageInNightMode}
                     --text: white;
                     --posts: #222;
+                    --invert: invert(1);
                 }
                 `:``}
                 body {
@@ -244,6 +249,21 @@ const GetCode = () => {
                     max-width: 100%;
                 }
 
+                .caption > h2 {
+                    padding: var(--spacing);
+                }
+
+                .link-container {
+                    padding: var(--spacing);
+                    margin:var(--spacing);
+                    border:var(--border-width) solid var(--borders);
+                    border-radius: var(--border-radius);
+                }
+
+                .caption:empty, p:empty {
+                    display:none;
+                }
+
                 .reblog-header a {
                     display: flex;
                     align-items:center;
@@ -307,12 +327,17 @@ const GetCode = () => {
                     margin: 0;
                 }`}
                 {searchBar !== '' ? `
-                 #search-form input {
+                   #search-form input {
                     padding: calc(var(--spacing) / 2);
                     width:100%;
+                    background:rgba(255,255,255, .12);
                     margin: calc(var(--spacing) /2) 0 0 0;
                     border:var(--border-width) solid var(--borders);
                     border-radius:var(--border-radius);
+                    color:var(--text);
+                 }
+                ::placeholder {
+                     color:var(--text);
                  }
                 ` :``}
                 {`
@@ -322,6 +347,10 @@ const GetCode = () => {
                     align-items: center;
                     justify-content: space-between;
                 }
+                .like-and-reblog .reblog_button, .like-and-reblog .like_button:not(.liked) {
+                    filter: var(--invert);
+                }
+
     ${sidebar ? `
                 aside {
                     width: calc(30% - calc(var(--spacing) * 2));
@@ -424,8 +453,11 @@ const GetCode = () => {
                 `}
                 ${reblogs && likes ? `
                     .reblog_button {
-                        margin-right: .4rem;
+                        margin-right: .6rem;
                     } 
+                    .like_button {
+                        height:20px;
+                    }
                 ` : ``}
                 ${header ? `
                     header {
@@ -583,7 +615,7 @@ const GetCode = () => {
                     {block:SourceLogo}<img src="{BlackLogoURL}"width="{LogoWidth}" height="{LogoHeight}" alt="{SourceTitle}" />{/block:SourceLogo}
                     {block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
                     {/block:ContentSource}
-                    <article id="{PostID}">
+                    <article id="post-{PostID}">
                         ${postInfo ? (
                                 `{block:Date}<div class="post-info">
                                 <div class="note-info">
@@ -629,7 +661,7 @@ const GetCode = () => {
                                 {/block:Chat}
 
                                 {block:link}
-                                    <div class="link">
+                                    <div class="link-container">
                                         <a href="{URL}">
                                             {Name}
                                         </a>
@@ -767,8 +799,8 @@ const GetCode = () => {
                 ${navLocation === 'footer' ? nav : ''}
                 ${searchBar === 'footer' ? search : ''}
                 </footer>` : ``}
-                </body>
-            </main>
+                </main>
+            </body>
         </html>
             `}
                     </pre>
