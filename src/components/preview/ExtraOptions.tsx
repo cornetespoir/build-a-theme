@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from "react";
 import { ThemeContext } from "../../App";
 import { Disclaimer } from "../Disclaimer";
+import { useLocalStorage, setLocalStorage } from "../../hooks/useLocalStorage";
 
 /*
 * TO DO: put extra / for fun theme features here
@@ -8,43 +9,48 @@ import { Disclaimer } from "../Disclaimer";
 
 
 const ExtraOptions = () => {
-    /* add to context */
     const { daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
-    const [active, setActive] = useState('')
+    console.log(customCursor)
+
+    const [active, setActive] = useLocalStorage('activeImage', '')
     function sideImageLocation(location: string) {
         if (location === 'right') {
             setSideImage('right')
             setActive(location)
+            setLocalStorage('sideImage', setSideImage, 'right')
         }
 
         else {
             setSideImage('left')
             setActive(location)
+            setLocalStorage('sideImage', setSideImage, 'left')
         }
+        setLocalStorage('activeImage', setActive, location)
+
     }
 
     function addCursor() {
-        setCustomCursor(!customCursor)
+        setLocalStorage('customCursor', setCustomCursor, !customCursor)
     }
 
     function addDayNight() {
-        setdaynight(!daynight)
+        setLocalStorage('dayNight', setdaynight, !daynight)
     }
 
     function searchLocation(event: ChangeEvent<HTMLSelectElement>) {
-        setSearchBar(event.target.value)
+        setLocalStorage('searchBar', setSearchBar, event.target.value)
     }
 
     function sideImageToggle() {
         if (sideImage !== 'default') {
             setSideImage('default')
+            setLocalStorage('sideImage', setSideImage, 'default')
         }
 
         else {
             setSideImage('left')
+            setLocalStorage('sideImage', setSideImage, 'left')
         }
-
-
     }
 
     function searchToggle() {
@@ -72,7 +78,7 @@ const ExtraOptions = () => {
                             <label className='half'>Search bar location</label>
                             {!footer && !header && !sidebar ? <Disclaimer icon="fas fa-exclamation-triangle" words="please enable a sidebar, header, or footer" />
                                 :
-                                <select name="title" id="title" onChange={(event) => searchLocation(event)}>
+                                <select name="title" id="title" defaultValue={searchBar} onChange={(event) => searchLocation(event)}>
                                     <option>Select an Option </option>
                                     {sidebar && <option value="sidebar">Sidebar</option>}
                                     {header && <option value="header">Header</option>}
@@ -117,7 +123,7 @@ const ExtraOptions = () => {
                 </div>
             </div>
             <div className='flex cursor'>
-                <input type="checkbox" id="customCursor" name="customCursorCheck" value="True" checked={customCursor} onChange={addCursor} />
+                <input type="checkbox" id="customCursor" name="customCursorCheck" onChange={addCursor} checked={customCursor} />
                 <label htmlFor="customCursor"><span></span> Custom Cursor</label>
                 {customCursor && <p className="disclaimer" style={{ marginTop: '0' }}>Custom cursor added to your theme options. Not visible in the preview.</p>}
             </div>

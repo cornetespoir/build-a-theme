@@ -14,9 +14,6 @@ const Customize = () => {
         setShowModal(!showModal)
     }
 
-
-
-
 return (
     <aside>
         <ThemeOptions />

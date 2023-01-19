@@ -1,29 +1,30 @@
 
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
 import { Customize, Preview } from './components';
 import { layoutContext, initialValues } from './Context';
+import { useLocalStorage } from './hooks/useLocalStorage';
 export const ThemeContext = createContext<layoutContext>(initialValues);
 
 function App() {
-  const [sidebar, setSidebar] = useState(false)
-  const [header, setHeader] = useState(false)
-  const [likes, setLikes] = useState(false)
-  const [reblogs, setReblogs] = useState(false)
-  const [footer, setFooter] = useState(false)
-  const [postInfo, setPostInfo] = useState(false)
-  const [descriptionLocation, setDescriptionLocation] = useState('none')
-  const [navLocation, setNavLocation] = useState('none')
-  const [titleLocation, setTitleLocation] = useState('none')
-  const [layout, setLayout] = useState('default')
-  const [postSize, setPostSize] = useState('large')
-  const [gridSize, setGridSize] = useState('small')
-  const [sidebarStyle, setSidebarStyle] = useState('default')
-  const [sidebarLocation, setSidebarLocation] = useState(false)
-  const [sideImage, setSideImage] = useState('default')
-  const [updatesTab, setUpdatesTab] = useState('default')
-  const [customCursor, setCustomCursor] = useState(false)
-  const [searchBar, setSearchBar] = useState('')
-  const [daynight, setdaynight] = useState(false)
+  const [sidebar, setSidebar] = useLocalStorage('sidebar', false)
+  const [header, setHeader] = useLocalStorage( 'header', false)
+  const [likes, setLikes] = useLocalStorage( 'likes', false)
+  const [reblogs, setReblogs] = useLocalStorage( 'reblogs', false)
+  const [footer, setFooter] = useLocalStorage( 'footer', false)
+  const [postInfo, setPostInfo] = useLocalStorage( 'postInfo', false)
+  const [descriptionLocation, setDescriptionLocation] = useLocalStorage( 'descriptionLocation', 'none')
+  const [navLocation, setNavLocation] = useLocalStorage( 'navLocation', 'none')
+  const [titleLocation, setTitleLocation] = useLocalStorage( 'titleLocation', 'none')
+  const [layout, setLayout] = useLocalStorage( 'layout', 'default')
+  const [postSize, setPostSize] = useLocalStorage( 'postSize', 'large')
+  const [gridSize, setGridSize] = useLocalStorage( 'gridSize', 'small')
+  const [sidebarStyle, setSidebarStyle] = useLocalStorage( 'sidebarStyle', 'default')
+  const [sidebarLocation, setSidebarLocation] = useLocalStorage( 'sidebarLocation', false)
+  const [sideImage, setSideImage] = useLocalStorage( 'sideImage', 'default')
+  const [updatesTab, setUpdatesTab] = useLocalStorage( 'updatesTab', 'default')
+  const [customCursor, setCustomCursor] = useLocalStorage( 'customCursor', false)
+  const [searchBar, setSearchBar] = useLocalStorage( 'searchBar', '')
+  const [daynight, setdaynight] = useLocalStorage( 'dayNight', false)
 
   const initalStates = {customCursor, setCustomCursor, sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
     sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, 

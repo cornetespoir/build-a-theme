@@ -1,26 +1,34 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../App";
+import { setLocalStorage, useLocalStorage } from "../../hooks/useLocalStorage";
 
 const SidebarStyles = () => {
     const {setSidebarLocation, setSidebarStyle, sidebarStyle} = useContext(ThemeContext)
-    const [active, setActive] = useState('')
+    const [active, setActive] = useLocalStorage('active', '')
 
     function sidebarStyles(event: { currentTarget: HTMLInputElement; }) {
         const element = event.currentTarget as HTMLInputElement
         const value = element.value
             setSidebarStyle(value)
+            setLocalStorage('sidebarStyle', 'default', value)
     }
 
     function changeSidebar(location: string) {
         if (location === 'right') {
             setSidebarLocation(true)
             setActive(location)
+            setLocalStorage('sidebarLocation', setSidebarLocation, true)
+            setLocalStorage('active', setActive, location)
         }
 
         else {
             setSidebarLocation(false)
             setActive(location)
+            setLocalStorage('sidebarLocation', setSidebarLocation, false)
+            setLocalStorage('active', setActive, '')
         }
+
+        
     }
     return (
         <div className='forms'>

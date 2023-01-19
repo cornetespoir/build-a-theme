@@ -1,40 +1,34 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../App";
+import { setLocalStorage, useLocalStorage } from "../../hooks/useLocalStorage";
 
 const PostOptions = () => {
 
-    const { postSize, gridSize, layout, setGridSize, setPostSize, likes, setLikes, reblogs, setReblogs, setPostInfo } = useContext(ThemeContext)
-    const [active, setActive] = useState('')
+    const { postInfo, postSize, gridSize, layout, setGridSize, setPostSize, likes, setLikes, reblogs, setReblogs, setPostInfo } = useContext(ThemeContext)
+    const [active, setActive] = useLocalStorage('activeInfo', '')
 
     function enableInteractions(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string) {
         if (type === 'likes') {
-            setLikes(!likes)
+            setLocalStorage('likes', setLikes, !likes)
         }
         else {
-            setReblogs(!reblogs)
+            setLocalStorage('reblogs', setReblogs, !reblogs)
         }
     }
 
     function changeLocation(event: React.MouseEvent<HTMLButtonElement>, location: string) {
-        if (location === 'top') {
-            setPostInfo(true)
-            setActive(location)
-        }
-
-        else {
-            setPostInfo(false)
-            setActive(location)
-        }
+        setLocalStorage('postInfo', setPostInfo, !postInfo);
+        setLocalStorage('activeInfo', setActive, location)
     }
 
     function changeSize(event: React.FormEvent<HTMLDivElement>, type: string) {
         const element = event.currentTarget as HTMLInputElement
         const value = element.value
         if (type === 'grid') {
-            setGridSize(value)
+            setLocalStorage('gridSize', setGridSize, value)
         }
         else {
-            setPostSize(value)
+            setLocalStorage('postSize', setPostSize, value)
         }
     }
     return (
