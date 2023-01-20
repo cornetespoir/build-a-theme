@@ -10,8 +10,6 @@ import { useLocalStorage, setLocalStorage } from "../../hooks/useLocalStorage";
 
 const ExtraOptions = () => {
     const { daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
-    console.log(customCursor)
-
     const [active, setActive] = useLocalStorage('activeImage', '')
     function sideImageLocation(location: string) {
         if (location === 'right') {

@@ -4,13 +4,17 @@
   --background-color: #fff;
   --text-color: #000;
   --background-size: cover;
-  --sidebar-background: #ffffff;
 
   /* regular styles */
   --spacing: 1rem;
   --white: 255, 255, 255;
   --black: 0, 0, 0;
   --porple: #6264d1;
+}
+
+.night-mode-theme {
+  --background-color: #191a22;
+  --text-color: white;
 }
 
 #preview-frame {
@@ -22,6 +26,13 @@
   padding: var(--spacing);
   height: 100vh;
   overflow: auto;
+}
+
+button {
+  background:var(--background-color);
+  color:var(--text);
+  border-style: solid;
+  border-radius:.4rem;
 }
 
 .layout-contained {
@@ -62,7 +73,8 @@ img {
   width: 100%;
   min-height: 4rem;
   position: relative;
-  background: white;
+  border-radius:.4rem;
+  background: var(--background-color);
 }
 
 article.sections:before,
@@ -141,6 +153,7 @@ section {
   border: 2px dashed var(--porple);
   background: var(--sidebar-background);
   top: 10px;
+  border-radius:.4rem;
   margin-top: 90px;
   position: sticky;
 
@@ -152,14 +165,9 @@ article {
 }
 
 .post-info {
-  border-top: 1px solid #ddd;
   width: 100%;
 }
 
-.top-post-info .post-info {
-  border-top: 0;
-  border-bottom: 1px solid #ddd;
-}
 
 .postcontent {
   display: flex;
@@ -171,10 +179,6 @@ article {
 
 .top-post-info .postcontent {
   flex-direction: column-reverse;
-}
-
-.content {
-  opacity: .8;
 }
 
 .post-info,
@@ -205,7 +209,7 @@ body {
 }
 
 a {
-  color: black;
+  color: var(--text);
 }
 
 .tarea {
@@ -293,7 +297,7 @@ aside:not(.sidebar) {
 code {
   margin: 20px 0;
   padding: 18px;
-  border-radius: 4px;
+  border-radius: .6rem;
   border: 1px dashed rgba(255, 255, 255, .08);
   background: rgba(255, 255, 255, .04);
 }
@@ -307,7 +311,7 @@ select {
   position: absolute;
   right: var(--spacing);
   z-index: 999;
-  background: white;
+  background: var(--background-color);
   border: 2px solid gray;
   margin-top: .6rem;
   border-radius: .4rem;
@@ -364,7 +368,7 @@ button {
   background: #1f1d2b;
   position: relative;
   max-width: 1000px;
-  border-radius: var(--spacing)
+  border-radius: var(--spacing);
 }
 
 .modal code {
@@ -842,6 +846,11 @@ select {
 
 }
 
+.open-code.themes {
+  opacity:.8;
+  font-size:.92rem;
+}
+
 .open-code:hover {
   animation: zoom .6s;
   background: var(--porple)
@@ -860,6 +869,7 @@ select {
   padding: var(--spacing);
   border: 1px solid rgba(var(--black), .2);
   border-radius: .6rem;
+  background:rgba(var(--white), .12);
   margin: var(--spacing) 0 0 0;
 }
 

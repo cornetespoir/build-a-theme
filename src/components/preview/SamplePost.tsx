@@ -72,8 +72,9 @@ const SamplePost = ({ postType, op }: SamplePostProps) => {
             {op === 'Trail' &&
                 <div className='reblog-header'><img alt="eggdesign avatar" className='avatar' src="https://64.media.tumblr.com/avatar_63ed1d13b42f_96.pnj"/> <a href="https://egg.design">eggdesign</a></div>
             }
-            <h2>This is a wip theme builder</h2>
-            <p>to do: write out something here</p>
+            <h2>Theme preview</h2>
+            <p>This is an example of what your theme will look like based on your settings. </p>
+            <p>Your final theme will come with color and image options (depending on what you've selected) so you can customize it even more!</p>
             {op === 'Trail' &&
                 <><div className='reblog-header'><span className='avatar'/> <span>username</span></div>   <p>Sample reply</p></>
             }

@@ -5,6 +5,7 @@ import { layoutContext, initialValues } from './Context';
 import { useLocalStorage } from './hooks/useLocalStorage';
 export const ThemeContext = createContext<layoutContext>(initialValues);
 
+
 function App() {
   const [sidebar, setSidebar] = useLocalStorage('sidebar', false)
   const [header, setHeader] = useLocalStorage( 'header', false)

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { GetCode } from './GetCode'
 import { ThemeOptions } from "./ThemeOptions";
 import { PostOptions } from './PostOptions'
@@ -14,8 +14,33 @@ const Customize = () => {
         setShowModal(!showModal)
     }
 
+    let darkMode = localStorage.getItem("night-mode")
+    const theme = document.documentElement;
+    const nightModeOn = () => {
+        theme.classList.add("night-mode-theme")
+        localStorage.setItem("night-mode", "enabled")
+    }
+    const nightModeOff = () => {
+        theme.classList.remove("night-mode-theme")
+        localStorage.setItem("night-mode", "disabled")
+    }
+    
+    if (darkMode === "enabled") {
+      nightModeOn()
+    }
+
+    function toggleTheme() {
+        darkMode = localStorage.getItem("night-mode") 
+        if (darkMode === 'enabled') {
+            nightModeOff()
+        }
+        else {
+            nightModeOn()
+        }
+    }
 return (
     <aside>
+        <button className='open-code themes' onClick={toggleTheme}><i className="fas fa-swatchbook"></i> Change builder color palette</button>
         <ThemeOptions />
         {sidebar &&  <SidebarStyles />}
         <PostOptions />
