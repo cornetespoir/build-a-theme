@@ -9,7 +9,7 @@ import { useLocalStorage, setLocalStorage } from "../../hooks/useLocalStorage";
 
 
 const ExtraOptions = () => {
-    const {keyboardNav, setKeyboardNav, layout, daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
+    const { keyboardNav, setKeyboardNav, layout, daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
     const [active, setActive] = useLocalStorage('activeImage', '')
     function sideImageLocation(location: string) {
         if (location === 'right') {
@@ -46,7 +46,7 @@ const ExtraOptions = () => {
         if (layout === 'grid') {
             setLocalStorage('keyboardNav', setKeyboardNav, false)
         }
-    }, [layout, keyboardNav])
+    }, [layout, keyboardNav, setKeyboardNav])
 
     function searchLocation(event: ChangeEvent<HTMLSelectElement>) {
         setLocalStorage('searchBar', setSearchBar, event.target.value)
@@ -105,10 +105,10 @@ const ExtraOptions = () => {
                     <label>Add day/night toggle button</label>
                     <button className={`toggle-button toggle-${daynight}`} onClick={() => toggleButtons('daynight')}>Toggle Day/Night mode</button>
                     {daynight &&
-                    <div className='flex half'>
-                    <label className='half'>Day/Night mode added!</label>
-                    <p className='disclaimer'>Also comes with an option to remove background images in night mode. Not visible in preview</p>
-                    </div>
+                        <div className='flex half'>
+                            <label className='half'>Day/Night mode added!</label>
+                            <p className='disclaimer'>Also comes with an option to remove background images in night mode. Not visible in preview</p>
+                        </div>
                     }
                 </div>
             </div>
@@ -134,12 +134,12 @@ const ExtraOptions = () => {
                 </div>
             </div>
             {layout !== 'grid' &&
-            <div className='flex cursor'>
-                <input type="checkbox" id="keyboardNav" name="keyboardNav" onChange={() => toggleButtons('keyboard')} checked={keyboardNav} />
-                <label htmlFor="keyboardNav"><span></span> Keyboard Navigation</label>
-                <p className="disclaimer" style={{ marginTop: '0' }}>Navigate between posts using 'j' and 'k' keys.</p>
-            </div>
-}
+                <div className='flex cursor'>
+                    <input type="checkbox" id="keyboardNav" name="keyboardNav" onChange={() => toggleButtons('keyboard')} checked={keyboardNav} />
+                    <label htmlFor="keyboardNav"><span></span> Keyboard Navigation</label>
+                    <p className="disclaimer" style={{ marginTop: '0' }}>Navigate between posts using 'j' and 'k' keys.</p>
+                </div>
+            }
             <div className='flex cursor'>
                 <input type="checkbox" id="customCursor" name="customCursorCheck" onChange={() => toggleButtons('cursor')} checked={customCursor} />
                 <label htmlFor="customCursor"><span></span> Custom Cursor</label>

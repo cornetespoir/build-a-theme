@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
     const {pagi, pinnedPost, daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs, keyboardNav } = useContext(ThemeContext)
-
     const [pop, setPop] = useState(false);
-    const side = document.getElementById('sidebarBg') as HTMLInputElement
-
     const search = `
         <form action="/search" method="get" id="search-form">
             <input type="text" name="q" class="query" value="" placeholder="Search">
