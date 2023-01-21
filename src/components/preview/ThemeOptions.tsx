@@ -5,7 +5,7 @@ import { setLocalStorage } from "../../hooks/useLocalStorage";
 
 const ThemeOptions = () => {
 
-    const { layout, titleLocation, descriptionLocation, navLocation, setSidebar, setNavLocation, sidebar, header, footer, setTitleLocation, setDescriptionLocation, setLayout } = useContext(ThemeContext)
+    const { pagi, setPagi, layout, titleLocation, descriptionLocation, navLocation, setSidebar, setNavLocation, sidebar, header, footer, setTitleLocation, setDescriptionLocation, setLayout } = useContext(ThemeContext)
 
     function changeLocation(event: ChangeEvent<HTMLSelectElement>, type: string) {
         if (type === 'title') {
@@ -19,6 +19,10 @@ const ThemeOptions = () => {
         else if (type === 'layout') {
             if (setLayout != null)
                 setLocalStorage('layout', setLayout, event.target.value)
+        }
+
+        else if (type === 'pagi') {
+            setLocalStorage('pagi', setPagi, event.target.value)
         }
         else {
             setLocalStorage('descriptionLocation', setDescriptionLocation, event.target.value)
@@ -66,6 +70,12 @@ const ThemeOptions = () => {
                     {header && <option value="header">Header</option>}
                     {footer && <option value="footer">Footer</option>}        </select>
             }
+
+            <label htmlFor='pagi'>Pagination Location</label>
+            <select defaultValue={pagi} name='pagi' id="pagi" onChange={(event) => changeLocation(event, 'pagi')}>
+                <option value="posts">Under posts</option>
+                {sidebar &&<option value="sidebar">In sidebar</option>}
+            </select>
             <div className='like-reblog-options'>
                 <div className="flex">
                     <label className='half'>Sidebar</label>

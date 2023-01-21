@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const {pinnedPost, daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs, keyboardNav } = useContext(ThemeContext)
+    const {pagi, pinnedPost, daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs, keyboardNav } = useContext(ThemeContext)
 
     const [pop, setPop] = useState(false);
     const side = document.getElementById('sidebarBg') as HTMLInputElement
@@ -185,7 +185,8 @@ const GetCode = () => {
                     {/block:iffullbackground}
                     ${customCursor ? `cursor:url({image:custom cursor}), auto;` : ``}
                 }
-
+                ${customCursor ? `
+                a:hover {cursor:url({image:custom cursor}), auto;}` : ``}
                 ${sideImage === 'left' ? `
                 #side-image {position:fixed; left: var(--spacing); bottom: var(--spacing);}
                 `: sideImage === 'right' ? `
@@ -255,6 +256,9 @@ const GetCode = () => {
                     border: var(--border-width) solid var(--borders);
                     border-radius: var(--border-radius);
                     background:var(--posts);
+                }
+                aside .pagination {
+                    margin: var(--spacing) auto auto auto;
                 }
 
                 article img {
@@ -449,6 +453,10 @@ const GetCode = () => {
                 .sidebar-style-dash {
                     padding:0;
                     text-align:center;
+                }
+
+                .sidebar-style-dash .pagination {
+                    border:0 solid transparent;
                 }
                 .sidebar-style-dash :is(h2, div){
                     padding:var(--spacing);
@@ -681,8 +689,32 @@ const GetCode = () => {
                                         {searchBar === 'sidebar' ? search : ''}
                                     </>
                             }
+                            {pagi === 'sidebar' ? `
+                {block:Pagination}
+                <div class="pagination flex centered">
+                    {block:previouspage}
+                    <a href="{previouspage}">Prev</a>
+                    {/block:previouspage}
+                        {block:JumpPagination length="5"}
+                            {block:CurrentPage}
+                            <span class="current-page">
+                                {PageNumber}
+                            </span>
+                            {/block:CurrentPage}
+                            {block:JumpPage}
+                            <a href="{URL}">
+                                {PageNumber}
+                            </a>
+                            {/block:JumpPage}
+                        {/block:JumpPagination}
+                    {block:nextpage}
+                    <a href="{nextpage}">Next</a>
+                    {/block:nextpage}
+                </div>
+                {/block:Pagination}
+                `: ``}
                             {`
-                        </div>
+                    </div>    
                 </aside>`}</>) : ''}
                     {`
                 <section>
@@ -855,10 +887,7 @@ const GetCode = () => {
                                         {searchBar === 'sidebar' ? search : ''}
                                     </>
                             }
-                            {`
-                        </div>
-                </aside>`}</>) : ''}
-                {`
+                            {pagi === 'sidebar' ? `
                 {block:Pagination}
                 <div class="pagination flex centered">
                     {block:previouspage}
@@ -881,13 +910,41 @@ const GetCode = () => {
                     {/block:nextpage}
                 </div>
                 {/block:Pagination}
-                ${footer ? `<footer>
+                `: ``}
+                            {`
+                        </div>
+                </aside>`}</>) : ''}
+              {pagi === 'posts' ? `
+                {block:Pagination}
+                <div class="pagination flex centered">
+                    {block:previouspage}
+                    <a href="{previouspage}">Prev</a>
+                    {/block:previouspage}
+                        {block:JumpPagination length="5"}
+                            {block:CurrentPage}
+                            <span class="current-page">
+                                {PageNumber}
+                            </span>
+                            {/block:CurrentPage}
+                            {block:JumpPage}
+                            <a href="{URL}">
+                                {PageNumber}
+                            </a>
+                            {/block:JumpPage}
+                        {/block:JumpPagination}
+                    {block:nextpage}
+                    <a href="{nextpage}">Next</a>
+                    {/block:nextpage}
+                </div>
+                {/block:Pagination}
+                `: ``}
+                {footer ? `<footer>
                 ${titleLocation === 'footer' ? title : ''}
                 ${descriptionLocation === 'footer' ? description : ''}
                 ${navLocation === 'footer' ? nav : ''}
                 ${searchBar === 'footer' ? search : ''}
                 </footer>` : ``}
-                </main>${layout !== 'grid' && keyboardNav ? `  
+                {`</main>${layout !== 'grid' && keyboardNav ? `  
                 <script src="https://static.tumblr.com/svdghan/uIEropkzb/keyboardscrolling.js"></script>` : ``}
             </body>
         </html>

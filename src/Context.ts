@@ -43,6 +43,8 @@ export interface layoutContext {
     setKeyboardNav: Dispatch<SetStateAction<boolean>>,
     pinnedPost: string,
     setPinnedPost: Dispatch<SetStateAction<string>>,
+    pagi: string,
+    setPagi: Dispatch<SetStateAction<string>>,
   }
   
   export const initialValues = {
@@ -88,4 +90,6 @@ export interface layoutContext {
     setKeyboardNav: () => { },
     pinnedPost: 'default',
     setPinnedPost: () => { },
+    pagi: 'posts',
+    setPagi: () => { },
   }
