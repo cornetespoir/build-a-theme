@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext } from "react";
+import React, { ChangeEvent, useContext, useEffect } from "react";
 import { ThemeContext } from "../../App";
 import { Disclaimer } from "../Disclaimer";
 import { useLocalStorage, setLocalStorage } from "../../hooks/useLocalStorage";
@@ -9,7 +9,7 @@ import { useLocalStorage, setLocalStorage } from "../../hooks/useLocalStorage";
 
 
 const ExtraOptions = () => {
-    const { daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
+    const {keyboardNav, setKeyboardNav, layout, daynight, setdaynight, setSearchBar, sideImage, searchBar, header, footer, sidebar, setSideImage, setCustomCursor, customCursor } = useContext(ThemeContext)
     const [active, setActive] = useLocalStorage('activeImage', '')
     function sideImageLocation(location: string) {
         if (location === 'right') {
@@ -27,13 +27,26 @@ const ExtraOptions = () => {
 
     }
 
-    function addCursor() {
-        setLocalStorage('customCursor', setCustomCursor, !customCursor)
+    function toggleButtons(key: string) {
+        if (key === 'cursor') {
+            setLocalStorage('customCursor', setCustomCursor, !customCursor)
+        }
+
+        else if (key === 'daynight') {
+            setLocalStorage('dayNight', setdaynight, !daynight)
+
+        }
+
+        else if (key === 'keyboard') {
+            setLocalStorage('keyboardNav', setKeyboardNav, !keyboardNav)
+        }
     }
 
-    function addDayNight() {
-        setLocalStorage('dayNight', setdaynight, !daynight)
-    }
+    useEffect(() => {
+        if (layout === 'grid') {
+            setLocalStorage('keyboardNav', setKeyboardNav, false)
+        }
+    }, [layout, keyboardNav])
 
     function searchLocation(event: ChangeEvent<HTMLSelectElement>) {
         setLocalStorage('searchBar', setSearchBar, event.target.value)
@@ -90,7 +103,7 @@ const ExtraOptions = () => {
             <div className='side-image-option'>
                 <div className="flex">
                     <label>Add day/night toggle button</label>
-                    <button className={`toggle-button toggle-${daynight}`} onClick={addDayNight}>Toggle Day/Night mode</button>
+                    <button className={`toggle-button toggle-${daynight}`} onClick={() => toggleButtons('daynight')}>Toggle Day/Night mode</button>
                     {daynight &&
                     <div className='flex half'>
                     <label className='half'>Day/Night mode added!</label>
@@ -120,8 +133,15 @@ const ExtraOptions = () => {
                     }
                 </div>
             </div>
+            {layout !== 'grid' &&
             <div className='flex cursor'>
-                <input type="checkbox" id="customCursor" name="customCursorCheck" onChange={addCursor} checked={customCursor} />
+                <input type="checkbox" id="keyboardNav" name="keyboardNav" onChange={() => toggleButtons('keyboard')} checked={keyboardNav} />
+                <label htmlFor="keyboardNav"><span></span> Keyboard Navigation</label>
+                <p className="disclaimer" style={{ marginTop: '0' }}>Navigate between posts using 'j' and 'k' keys.</p>
+            </div>
+}
+            <div className='flex cursor'>
+                <input type="checkbox" id="customCursor" name="customCursorCheck" onChange={() => toggleButtons('cursor')} checked={customCursor} />
                 <label htmlFor="customCursor"><span></span> Custom Cursor</label>
                 {customCursor && <p className="disclaimer" style={{ marginTop: '0' }}>Custom cursor added to your theme options. Not visible in the preview.</p>}
             </div>

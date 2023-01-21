@@ -3,7 +3,7 @@ import { ThemeContext } from "../../App";
 
 const GetCode = () => {
 
-    const {daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs } = useContext(ThemeContext)
+    const {pinnedPost, daynight, searchBar, customCursor, sideImage, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, layout, sidebar, header, footer, titleLocation, descriptionLocation, postInfo, likes, reblogs, keyboardNav } = useContext(ThemeContext)
 
     const [pop, setPop] = useState(false);
     const side = document.getElementById('sidebarBg') as HTMLInputElement
@@ -15,7 +15,7 @@ const GetCode = () => {
 
     const title =
         `
-                    <h2>{Title}</h2>
+                  {block:ShowTitle}<h2 class="blog-title">{Title}</h2> {/block:ShowTitle}
                     `
     const pages =
         `
@@ -99,6 +99,9 @@ const GetCode = () => {
             {layout === 'contained' ? `
             <meta name="color:container background" content="#fff"/>
              `: ''}
+             {pinnedPost === 'tape' ? `
+            <meta name="color:tape background" content="#fff"/>
+             `: ''}
             {`<meta name="text:border width" content="1px"/>
             <meta name="text:border radius" content="4px"/>
             <meta name="image:background" content=""/>`}
@@ -110,10 +113,17 @@ const GetCode = () => {
             <meta name="image:container background" content=""/>
              `: ''}
              {daynight ? `
-            <meta name="color:night mode accent" content="" />
+            <meta name="color:night mode accent" content="#fff" />
             <meta name="if:Remove background image in night mode" content=""/>` :``}
            {`
             <meta name="if:full background" content=""/>
+             
+            <meta name="select:Font" content="Helvetica" title="Helvetica" />
+            <meta name="select:Font" content="Roboto" title="Roboto" />
+            <meta name="select:Font" content="Favorit" title="Favorit" />
+            <meta name="select:Font" content="Calluna" title="Calluna" />
+            <meta name="select:Font" content="Fairwater" title="Fairwater" />
+            <meta name="select:Font" content="Source Code Pro" title="Source Code Pro" />
             {/block:Options}
 
             {NewPostStyles}
@@ -143,11 +153,14 @@ const GetCode = () => {
                     --border-width: {text:border width};
                     --border-radius: {text:border radius};
                     --posts: {color:posts};
-                    --headerimage: url({HeaderImage});
-                    ${daynight ?`
+                    --headerimage: url({HeaderImage}); `}
+                    {pinnedPost === 'tape' ? `
+                     --tape: {color:tape background};
+                    `: ``}
+                    {daynight ?`
                     --invert: invert(0);
                     --night-mode-accent: {color:night mode accent};
-                    ` :``}
+                    ` :``} {`
                 }
                 ${daynight ? `
                 .night-mode-theme {
@@ -162,7 +175,7 @@ const GetCode = () => {
                 }
                 `:``}
                 body {
-                    font-family: Roboto, sans-serif;
+                    font-family: {select:Font}, sans-serif;
                     margin: 0;
                     height: 100vh;
                     color: var(--text);
@@ -218,6 +231,10 @@ const GetCode = () => {
                     text-decoration: underline;
                 }
 
+                .blog-title {
+                    font-family: {TitleFont};
+                }
+
                 main, .pagination {
                     display: flex;
                     flex-wrap: wrap;
@@ -232,6 +249,7 @@ const GetCode = () => {
 
                 article, .pagination {
                     width: 100%;
+                    position:relative;
                     max-width: ${postSize === 'small' ? '400px' : postSize === 'medium' ? '540px' : '700px'};
                     margin: calc(var(--spacing) * 4) auto;
                     border: var(--border-width) solid var(--borders);
@@ -341,6 +359,73 @@ const GetCode = () => {
                     align-items: center;
                     justify-content: space-between;
                 }
+                .pinned {
+                    font-weight:bold;
+                    color:var(--accent);
+                }
+
+                .pinned {
+                    font-weight:bold;
+                }${pinnedPost === 'pin' ? `
+                .pinned-pin {
+                    position: absolute;
+                    right: 0;
+                    top:-4px;
+                    padding:0;
+                    transform:rotate(45deg);
+                  }
+                  
+                  .pinned-pin i {
+                    width:2px;
+                    font-size:0;
+                    color:transparent;
+                    height:.4rem;
+                    background:var(--accent)!important;
+                    display:block;
+                    position:absolute;
+                    left:0;
+                    margin-left:calc(50% - 1px);
+                    margin-top:-.4rem;
+                  }
+                  .pinned-pin:before, .pinned-pin:after {
+                    content:'';
+                    border-radius:.2rem;
+                    display:block;
+                    transform:translate(0, -1.4rem);
+                    border:7px solid transparent;
+                    border-bottom:10px solid var(--accent);
+                  }
+                  
+                  .pinned-pin:before {
+                    transform:translate(0,0);
+                    border-bottom-color: transparent;
+                    border-top:10px solid var(--accent);
+                  }
+                ` : pinnedPost === 'tape' ? `
+                .pinned-tape {
+                    color:transparent;
+                    width: 40%;
+                    position: absolute;
+                    height: 1.6rem;
+                    display: block;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, .08);
+                    background: var(--tape);
+                    border-bottom-right-radius: 2px;
+                    transform: skew(6deg) rotateZ(-1deg);
+                    border-radius: 6px/14px 0;
+                    z-index: 2;
+                    opacity: .2;
+                    top: -.8rem;
+                    margin-left: -20%;
+                    left: 50%;
+                  
+                }
+                  
+                ` :`
+                .pinned-default {
+                    padding:var(--spacing);
+                }
+                `}   
                 .like-and-reblog .reblog_button, .like-and-reblog .like_button:not(.liked) {
                     filter: var(--invert);
                 }
@@ -571,7 +656,7 @@ const GetCode = () => {
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''}<img src="{PortraitURL-128}"></div>`}
+                                {`<div class="header-image">${searchBar === 'sidebar' ? search :''} {block:ShowAvatar}<img src="{PortraitURL-128}">{/block:ShowAvatar}</div>`}
                                 {titleLocation === 'sidebar' ? title : ''}
                                 {descriptionLocation === 'sidebar' ? description : ''}
                                 {navLocation === 'sidebar' ? nav + pages : ''}
@@ -579,7 +664,7 @@ const GetCode = () => {
                                 : sidebarStyle === 'bubble' ?
                                     <>
                                         {`<div class="bubble">
-                                    <a href="/"><img src="{PortraitURL-128}"></a> <a href="/">@{name}</a>
+                                    {block:ShowAvatar}<a href="/"><img src="{PortraitURL-128}"></a>{/block:ShowAvatar} <a href="/">@{name}</a>
                                     <div class="bubble-desc">`}
                                         {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
@@ -601,6 +686,15 @@ const GetCode = () => {
                 </aside>`}</>) : ''}
                     {`
                 <section>
+                    {block:SearchPage}
+                    <article><div class="reblogs">{lang:Found SearchResultCount results for SearchQuery}</div></article>
+                    {/block:SearchPage}
+                    {block:TagPage}
+                    <article><div class="reblogs">{lang:Showing TagResultCount posts tagged Tag}</div></article>
+                    {/block:TagPage}
+                    {block:DayPage}
+                    <article><div class="reblogs">{lang:Viewing everything posted on Month DayOfMonth Year}</div></article>
+                    {/block:DayPage}
                     {block:Posts}
                     <!-- {block:NoRebloggedFrom}
                     {block:RebloggedFrom}{ReblogParentName}{/block:RebloggedFrom}
@@ -610,10 +704,10 @@ const GetCode = () => {
                     {block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
                     {/block:ContentSource}
                     <article id="post-{PostID}">
+                        {block:PinnedPostLabel}<div class="pinned pinned-${pinnedPost}"><i></i>${pinnedPost === 'default' ? '{PinnedPostLabel}' : ''}</div>{/block:PinnedPostLabel}
                         ${postInfo ? (
                                 `{block:Date}<div class="post-info">
-                                <div class="note-info">
-                                    <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div> 
+                                <div class="note-info">Posted <a href="/day/{year}/{MonthNumberWithZero}/{DayOfMonth}">{TimeAgo}</a> with <a href="{Permalink}"> {NoteCountwithLabel}</a></div> 
                                 ${likes || reblogs
                                     ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
                                     : ''}
@@ -712,7 +806,7 @@ const GetCode = () => {
                             ${!postInfo ? (
                                 `{block:Date}<div class="post-info">
                                 <div class="note-info">
-                                    <a href="{Permalink}">Posted {timeAgo} with {NoteCountwithLabel}</a></div>
+                                    <a href="{Permalink}">Posted <a href="/day/{year}/{MonthNumberWithZero}/{DayOfMonth}">{TimeAgo}</a> with <a href="{Permalink}"> {NoteCountwithLabel}</a></div>
                                 ${likes || reblogs
                                     ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
                                     : ''}
@@ -793,7 +887,8 @@ const GetCode = () => {
                 ${navLocation === 'footer' ? nav : ''}
                 ${searchBar === 'footer' ? search : ''}
                 </footer>` : ``}
-                </main>
+                </main>${layout !== 'grid' && keyboardNav ? `  
+                <script src="https://static.tumblr.com/svdghan/uIEropkzb/keyboardscrolling.js"></script>` : ``}
             </body>
         </html>
             `}

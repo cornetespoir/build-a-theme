@@ -25,9 +25,11 @@ function App() {
   const [updatesTab, setUpdatesTab] = useLocalStorage( 'updatesTab', 'default')
   const [customCursor, setCustomCursor] = useLocalStorage( 'customCursor', false)
   const [searchBar, setSearchBar] = useLocalStorage( 'searchBar', '')
+  const [pinnedPost, setPinnedPost] = useLocalStorage( 'pinnedPost', 'default')
   const [daynight, setdaynight] = useLocalStorage( 'dayNight', false)
+  const [keyboardNav, setKeyboardNav] = useLocalStorage( 'keyboardNav', false)
 
-  const initalStates = {customCursor, setCustomCursor, sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
+  const initalStates = {pinnedPost, setPinnedPost, keyboardNav, setKeyboardNav, customCursor, setCustomCursor, sideImage, setSideImage, updatesTab, setUpdatesTab, sidebarLocation, setSidebarLocation, 
     sidebarStyle, setSidebarStyle, gridSize, setGridSize, postSize, setPostSize, navLocation, setNavLocation, postInfo, 
     setPostInfo, reblogs, setReblogs, likes, setLikes, descriptionLocation, setDescriptionLocation, sidebar, setSidebar, header, setHeader, 
     daynight, setdaynight, footer, setFooter, titleLocation, setTitleLocation, layout, setLayout, searchBar, setSearchBar }

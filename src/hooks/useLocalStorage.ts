@@ -29,4 +29,5 @@ function setLocalStorage(key:any, defaultValue: any, current: any) {
         localStorage.setItem(key, JSON.stringify(current))
         defaultValue(current)
 }
+
 export {useLocalStorage, setLocalStorage}

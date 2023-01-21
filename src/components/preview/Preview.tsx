@@ -8,7 +8,7 @@ interface PreviewProps {
     className?: string
 }
 const Preview = ({ className }: PreviewProps) => {
-    const { searchBar, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
+    const {pinnedPost, searchBar, sidebarLocation, sidebarStyle, gridSize, postSize, navLocation, sidebar, header, footer, setFooter, setHeader, titleLocation, descriptionLocation, postInfo, layout } = useContext(ThemeContext)
 
     const [postType, setPostType] = useState("Text");
     function addSections(type: string) {
@@ -76,11 +76,18 @@ const Preview = ({ className }: PreviewProps) => {
                 }
                 <section>
                     <Containers type='article' className={`${postInfo && 'top-post-info'}`}>
-                        <div className='post-types'>preview as:
-                            <input type="radio" value="Text" name="postType" checked={postType === "Text"} onChange={(event) => changePostType(event)} /> Text
-                            <input type="radio" value="Photo" name="postType" checked={postType === "Photo"} onChange={(event) => changePostType(event)} /> Photo
-                            <input type="radio" value="Audio" name="postType" checked={postType === "Audio"} onChange={(event) => changePostType(event)} /> Audio
+                        <div className='post-types'>
+                            <input id="textPost" type="radio" value="Text" name="postType" checked={postType === "Text"} onChange={(event) => changePostType(event)} /> <label htmlFor="textPost"><span className='screen-reader'>Text Posts</span><i className="fa fa-font"></i></label>
+                            <input id="photoPost" type="radio" value="Photo" name="postType" checked={postType === "Photo"} onChange={(event) => changePostType(event)} /> <label htmlFor="photoPost"><span className='screen-reader'>Photo Posts</span><i className="fa fa-camera"></i></label>
+                            <input id="audioPost" type="radio" value="Audio" name="postType" checked={postType === "Audio"} onChange={(event) => changePostType(event)} /> <label htmlFor="audioPost"><span className='screen-reader'>Audio Posts</span><i className="fa fa-music"></i></label>
                         </div>
+                        <div className={`pinned-label pinned-${pinnedPost}`}>
+                            {pinnedPost === 'pin' ? 
+                            <>
+                            <i></i>
+                            </> 
+                            : pinnedPost === 'tape' ? '' : 'Pinned Post'} 
+                            </div>
                         <div className="postcontent">
                             <div className='content'>
                                 <SamplePost postType={postType} op={'original'} />

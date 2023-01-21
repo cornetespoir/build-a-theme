@@ -39,6 +39,10 @@ export interface layoutContext {
     setCustomCursor: Dispatch<SetStateAction<boolean>>,
     daynight: boolean,
     setdaynight: Dispatch<SetStateAction<boolean>>,
+    keyboardNav: boolean,
+    setKeyboardNav: Dispatch<SetStateAction<boolean>>,
+    pinnedPost: string,
+    setPinnedPost: Dispatch<SetStateAction<string>>,
   }
   
   export const initialValues = {
@@ -80,4 +84,8 @@ export interface layoutContext {
     setCustomCursor: () => { },
     daynight: false,
     setdaynight: () => { },
+    keyboardNav: false,
+    setKeyboardNav: () => { },
+    pinnedPost: 'default',
+    setPinnedPost: () => { },
   }

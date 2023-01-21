@@ -4,7 +4,7 @@ import { setLocalStorage, useLocalStorage } from "../../hooks/useLocalStorage";
 
 const PostOptions = () => {
 
-    const { postInfo, postSize, gridSize, layout, setGridSize, setPostSize, likes, setLikes, reblogs, setReblogs, setPostInfo } = useContext(ThemeContext)
+    const { pinnedPost, setPinnedPost, postInfo, postSize, gridSize, layout, setGridSize, setPostSize, likes, setLikes, reblogs, setReblogs, setPostInfo } = useContext(ThemeContext)
     const [active, setActive] = useLocalStorage('activeInfo', '')
 
     function enableInteractions(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, type: string) {
@@ -27,8 +27,12 @@ const PostOptions = () => {
         if (type === 'grid') {
             setLocalStorage('gridSize', setGridSize, value)
         }
-        else {
+        else if (type === 'post') {
             setLocalStorage('postSize', setPostSize, value)
+        }
+
+        else if (type === 'pinned') {
+            setLocalStorage('pinnedPost', setPinnedPost, value)
         }
     }
     return (
@@ -70,6 +74,12 @@ const PostOptions = () => {
                     <button className={`toggle-button toggle-${reblogs}`} onClick={(event) => enableInteractions(event, 'reblogs')}>Toggle Reblogs</button>
                 </div>
             </div>
+            <h4>Pinned Post styles</h4>
+            <div className={`select-size post`}>
+                    <input id="pinnedDefault" type="radio" value="default" name="pinnedPost" checked={pinnedPost === "default"} onChange={(event) => changeSize(event, 'pinned')} /> <label htmlFor='pinnedDefault'><i></i> <span>Default</span></label>
+                    <input id="pinnedPin" type="radio" value="pin" name="pinnedPost" checked={pinnedPost === "pin"} onChange={(event) => changeSize(event, 'pinned')} /> <label htmlFor="pinnedPin"><i></i>  <span>Pin</span></label>
+                    <input id="pinnedTape" type="radio" value="tape" name="pinnedPost" checked={pinnedPost === "tape"} onChange={(event) => changeSize(event, 'pinned')} />  <label htmlFor="pinnedTape"><i></i> <span>Tape</span></label>
+                </div>
         </div>
     )
 }

@@ -68,6 +68,67 @@ img {
   max-width: 100%;
 }
 
+.pinned-label {
+  font-weight:bold;
+}
+
+.pinned-pin, .pinned-tape{
+  color:transparent;
+}
+
+.pinned-pin {
+  position: absolute;
+  right: 0;
+  top:-4px;
+  padding:0;
+  transform:rotate(45deg);
+}
+
+.pinned-pin i {
+  width:2px;
+  height:.4rem;
+  background:black;
+  display:block;
+  position:absolute;
+  left:0;
+  margin-left:calc(50% - 1px);
+  margin-top:-.4rem;
+}
+.pinned-pin:before, .pinned-pin:after {
+  content:'';
+  border-radius:.2rem;
+  display:block;
+  transform:translate(0, -1.4rem);
+  border:7px solid transparent;
+  border-bottom:10px solid black;
+}
+
+.pinned-pin:before {
+  transform:translate(0,0);
+  border-bottom-color: transparent;
+  border-top:10px solid black;
+}
+
+
+.pinned-tape {
+    width: 40%;
+    position: absolute;
+    height: 1.6rem;
+    display: block;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .08);
+    background: gray;
+    border-bottom-right-radius: 2px;
+    transform: skew(6deg) rotateZ(-1deg);
+    border-radius: 6px/14px 0;
+    opacity: .2;
+    top: -.8rem;
+    margin-left: -20%;
+    left: 50%;
+}
+
+h2 {
+  margin-top:0;
+}
 .sections {
   border: 2px dashed var(--porple);
   width: 100%;
@@ -118,12 +179,29 @@ article.sections {
   padding: var(--spacing);
 }
 
+.post-types input {
+  opacity:0;
+  height:0;
+  width:0;
+}
+
+.post-types input + label {
+  cursor:pointer;
+  padding:.2rem .4rem;
+  border-radius:.4rem;
+}
+.post-types input:checked + label {
+  background:rgba(0,0,0,.08);
+
+}
 .post-types {
   opacity: .8;
   width: 100%;
   font-size: .98rem;
   background: rgba(0, 0, 0, .08);
   border-radius: .4rem;
+  display:flex;
+  padding:calc(var(--spacing) /2)!important;
 }
 
 .post-types+.content {
@@ -1004,4 +1082,17 @@ height:1rem;
 transform:translate(-.32rem, -.32rem);
 border-radius: 50%;
 box-shadow: .32rem .32rem 0 0 black;
+}
+
+.screen-reader {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
 }
