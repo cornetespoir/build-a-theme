@@ -10,7 +10,7 @@ const SidebarStyles = () => {
         const element = event.currentTarget as HTMLInputElement
         const value = element.value
             setSidebarStyle(value)
-            setLocalStorage('sidebarStyle', 'default', value)
+            setLocalStorage('sidebarStyle', setSidebarStyle, value)
     }
 
     function changeSidebar(location: string) {
