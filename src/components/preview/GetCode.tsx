@@ -62,7 +62,7 @@ const GetCode = () => {
             <meta name="color:links" content="#000" />
             <meta name="color:tags" content="#000" />
             <meta name="color:sidebar links" content="{AccentColor}"/>
-            <meta name="color:search background content="#fff" />
+            <meta name="color:search background" content="#fff" />
             <meta name="color:search text" content="#000"/>
             <meta name="color:borders" content="#ddd"/>`}
                         {layout === 'contained' ? `
