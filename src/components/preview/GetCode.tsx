@@ -206,7 +206,7 @@ const GetCode = () => {
                     text-decoration: underline;
                 }
 
-                article iframe {
+                article iframe, .tumblr_video_container {
                     max-width: 100%;
                 }
 
