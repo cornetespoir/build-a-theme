@@ -146,6 +146,8 @@ const GetCode = () => {
                     --text: white;
                     --posts: #222;
                     --invert: invert(1);
+                    --links: var(--night-mode-accent);
+                    --tags: var(--night-mode-accent);
                 }
                 `: ``}
                 body {
@@ -671,7 +673,7 @@ const GetCode = () => {
                                         {`</div>`}
                                     </>
                                     : <>
-                                        {titleLocation === 'sidebar' ? `title` : ''}
+                                        {titleLocation === 'sidebar' ? title : ''}
                                         {descriptionLocation === 'sidebar' ? description : ''}
                                         {navLocation === 'sidebar' ? nav : ''}
                                         {searchBar === 'sidebar' ? search : ''}
