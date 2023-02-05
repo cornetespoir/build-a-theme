@@ -59,6 +59,11 @@ const GetCode = () => {
             <meta name="color:background" content="#fff"/>
             <meta name="color:posts" content="#fff"/>
             <meta name="color:text" content="#000"/>
+            <meta name="color:links" content="#000" />
+            <meta name="color:tags" content="#000" />
+            <meta name="color:sidebar links" content="{AccentColor}"/>
+            <meta name="color:search background content="#fff" />
+            <meta name="color:search text" content="#000"/>
             <meta name="color:borders" content="#ddd"/>`}
                         {layout === 'contained' ? `
             <meta name="color:container background" content="#fff"/>
@@ -117,6 +122,11 @@ const GetCode = () => {
                     --border-width: {text:border width};
                     --border-radius: {text:border radius};
                     --posts: {color:posts};
+                    --tags: {color:tags};
+                    --links: {color:links};
+                    --sidebar-links: {color:sidebar links};
+                    --search-background: {color:search background};
+                    --search-text: {color:search text};
                     --headerimage: url({HeaderImage}); `}
                         {pinnedPost === 'tape' ? `
                      --tape: {color:tape background};
@@ -162,7 +172,7 @@ const GetCode = () => {
                 }` : ''
                             }
                 a {
-                    color: var(--text);
+                    color: var(--links);
                 }
 
                 `}
@@ -194,6 +204,10 @@ const GetCode = () => {
 
                 article a:hover {
                     text-decoration: underline;
+                }
+
+                article iframe {
+                    max-width: 100%;
                 }
 
                 .blog-title {
@@ -310,14 +324,14 @@ const GetCode = () => {
                    #search-form input {
                     padding: calc(var(--spacing) / 2);
                     width:100%;
-                    background:rgba(255,255,255, .12);
+                    background:var(--search-background);
                     margin: calc(var(--spacing) /2) 0 0 0;
                     border:var(--border-width) solid var(--borders);
                     border-radius:var(--border-radius);
-                    color:var(--text);
+                    color:var(--search-text);
                  }
                 ::placeholder {
-                     color:var(--text);
+                     color:var(--search-text);
                  }
                 ` : ``}
                         {`
@@ -523,6 +537,14 @@ const GetCode = () => {
                     margin-right: .4rem;
                     color: var(--text);
                     text-decoration:none;
+                }
+
+                aside a {
+                    color: var(--sidebar-links);
+                }
+
+                .tags a {
+                    color: var(--tags);
                 }
 
                 .pages-container a {
