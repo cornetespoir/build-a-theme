@@ -653,7 +653,7 @@ const GetCode = () => {
                             {sidebarStyle === 'dash' ?
                                 <>
                                     {`<div class="header-image">${searchBar === 'sidebar' ? search : ''} {block:ShowAvatar}<img src="{PortraitURL-128}">{/block:ShowAvatar}</div>`}
-                                    {titleLocation === 'sidebar' ? `title` : ''}
+                                    {titleLocation === 'sidebar' ? title : ''}
                                     {descriptionLocation === 'sidebar' ? description : ''}
                                     {navLocation === 'sidebar' ? nav + pages : ''}
                                 </>
