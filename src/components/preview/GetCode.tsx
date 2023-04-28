@@ -65,25 +65,24 @@ const GetCode = () => {
             <meta name="color:search background" content="#fff" />
             <meta name="color:search text" content="#000"/>
             <meta name="color:borders" content="#ddd"/>`}
-                        {layout === 'contained' ? `
-            <meta name="color:container background" content="#fff"/>
-             `: ''}
-                        {pinnedPost === 'tape' ? `
-            <meta name="color:tape background" content="#fff"/>
-             `: ''}
-                        {`<meta name="text:border width" content="1px"/>
+                        {layout === 'contained' && `
+            <meta name="color:container background" content="#fff"/>`}
+                        {pinnedPost === 'tape' && `
+            <meta name="color:tape background" content="#fff"/>`}
+                {`
+            <meta name="text:border width" content="1px"/>
             <meta name="text:border radius" content="4px"/>
+            <meta name="text:font size" content="16px" />
             <meta name="image:background" content=""/>`}
-                        {sideImage !== 'default' ? `
-            <meta name="image:side image" content=""/>` : ''}
-                        {customCursor ? `
-            <meta name="image:custom cursor" content=""/>` : ''}
-                        {layout === 'contained' ? `
-            <meta name="image:container background" content=""/>
-             `: ''}
-                        {daynight ? `
+                        {sideImage !== 'default' && `
+            <meta name="image:side image" content=""/>`}
+                        {customCursor && `
+            <meta name="image:custom cursor" content=""/>`}
+                        {layout === 'contained' && `
+            <meta name="image:container background" content=""/>`}
+                        {daynight && `
             <meta name="color:night mode accent" content="#fff" />
-            <meta name="if:Remove background image in night mode" content=""/>` : ``}
+            <meta name="if:Remove background image in night mode" content=""/>`}
                         {`
             <meta name="if:full background" content=""/>
              
@@ -95,8 +94,8 @@ const GetCode = () => {
             <meta name="select:Font" content="Source Code Pro" title="Source Code Pro" />
             {/block:Options}
 
-            {NewPostStyles}
-            ${daynight ? `
+            {NewPostStyles}`}
+            {daynight && `
             <script>
                 const themed = localStorage.getItem('night-mode');
                 if (themed === "enabled") {
@@ -105,7 +104,7 @@ const GetCode = () => {
                 }
             </script>
             <script src="https://static.tumblr.com/svdghan/gFJrolu7g/daynight.js"></script>
-            `: ``}
+            `} {`
              <style>
              @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
 
@@ -128,9 +127,9 @@ const GetCode = () => {
                     --search-background: {color:search background};
                     --search-text: {color:search text};
                     --headerimage: url({HeaderImage}); `}
-                        {pinnedPost === 'tape' ? `
+                        {pinnedPost === 'tape' && `
                      --tape: {color:tape background};
-                    `: ``}
+                    `}
                         {daynight ? `
                     --invert: invert(0);
                     --night-mode-accent: {color:night mode accent};
@@ -152,33 +151,35 @@ const GetCode = () => {
                 `: ``}
                 body {
                     font-family: {select:Font}, sans-serif;
+                    font-size: clamp(.92rem, {text:font size}, 20px);
                     margin: 0;
                     height: 100vh;
                     color: var(--text);
                     background: var(--background) var(--background-image) center center fixed;
                     {block:iffullbackground}
                     background-size: cover;
-                    {/block:iffullbackground}
-                    ${customCursor ? `cursor:url({image:custom cursor}), auto;` : ``}
-                }
-                ${customCursor ? `
-                a:hover {cursor:url({image:custom cursor}), auto;}` : ``}
-                ${sideImage === 'left' ? `
+                    {/block:iffullbackground}`}
+                    {customCursor && `cursor:url({image:custom cursor}), auto;`}
+                {
+                `}
+                `}
+                {customCursor && `
+                a:hover {cursor:url({image:custom cursor}), auto;}`}
+                {sideImage === 'left' ? `
                 #side-image {position:fixed; left: var(--spacing); bottom: var(--spacing);}
                 `: sideImage === 'right' ? `
                 #side-image {position:fixed; right: var(--spacing); bottom: var(--spacing);}
                 ` : ``}
-                ${sideImage !== 'default' ? `
+                {sideImage !== 'default' && `
                 #side-image img {
                     max-width:350px;
-                }` : ''
-                            }
+                }`}
+                {`
                 a {
                     color: var(--links);
                 }
-
                 `}
-                        {header ? `
+                        {header && `
                 header {
                     margin:var(--spacing) auto;
                     max-width:1100px;
@@ -187,8 +188,8 @@ const GetCode = () => {
                     border: var(--border-width) solid var(--borders);
                     border-radius:var(--border-radius);
                 }
-                `: ``}
-                        {header ? `
+                `}
+                        {footer && `
                 footer {
                     width:100%;
                     margin:var(--spacing) auto;
@@ -198,7 +199,7 @@ const GetCode = () => {
                     border: var(--border-width) solid var(--borders);
                     border-radius:var(--border-radius);
                 }
-                `: ``}
+                `}
                         {`
                 article a {
                     text-decoration: none;
@@ -245,10 +246,6 @@ const GetCode = () => {
                     max-width: 100%;
                 }
 
-                .caption > h2 {
-                    padding: var(--spacing);
-                }
-
                 .link-container {
                     padding: var(--spacing);
                     margin:var(--spacing);
@@ -287,8 +284,7 @@ const GetCode = () => {
                     ${layout === 'contained' ? `background: {color:container background} url({image:container background})` : ''}
                 }
 
-
-                .contained article, .pagination {
+                .contained article, .contained .pagination {
                     max-width: 500px;
                 }
 
@@ -309,8 +305,13 @@ const GetCode = () => {
                     margin: var(--spacing) 0;
                 }
 
-                .original-post, .reblogs, .tags, .post-info, .pagination, .quote-container, .replies, .question {
+                .original-post, .reblog-header, .tags, .post-info, .pagination, .quote-container, .replies, .question {
                     padding: var(--spacing);
+                }
+
+                .reblog-content p, .reblog-content h2, .reblog-content h1 {
+                    margin-left: var(--spacing);
+                    margin-right: var(--spacing);
                 }
 
                 .quote-container, .replies, .question {
@@ -322,7 +323,7 @@ const GetCode = () => {
                     padding: calc(var(--spacing) /2) 0;
                     margin: 0;
                 }`}
-                        {searchBar !== '' ? `
+                {searchBar !== '' && `
                    #search-form input {
                     padding: calc(var(--spacing) / 2);
                     width:100%;
@@ -335,7 +336,7 @@ const GetCode = () => {
                 ::placeholder {
                      color:var(--search-text);
                  }
-                ` : ``}
+                `}
                         {`
                 .post-info, .like-and-reblog, .contained {
                     display: flex;
@@ -412,9 +413,9 @@ const GetCode = () => {
                 `}   
                 .like-and-reblog .reblog_button, .like-and-reblog .like_button:not(.liked) {
                     filter: var(--invert);
-                }
+                }`}
 
-    ${sidebar ? `
+    {sidebar ? `
                 aside {
                     width: calc(30% - calc(var(--spacing) * 2));
                     height:100vh;
@@ -518,19 +519,19 @@ const GetCode = () => {
                     width: 100%;
                  }
                 `}
-                ${reblogs && likes ? `
+                {reblogs && likes && `
                     .reblog_button {
                         margin-right: .6rem;
                     } 
                     .like_button {
                         height:20px;
                     }
-                ` : ``}
-                ${header ? `
+                `}
+                {header && `
                     header {
                         width: 100%;
                     }
-                ` : ``}
+                `}{`
                 .pages-container, .nav-container {
                     margin: calc(var(--spacing) /4) 0;
                 }
@@ -567,7 +568,8 @@ const GetCode = () => {
                         width: 100%;
                         height: auto;
                     }
-                    ${sidebar ? ` aside, .sidebar-container{
+                    `}
+                    {sidebar && ` aside, .sidebar-container{
                         width: 100%;
                         max-width:100%;
                         height: auto;
@@ -577,7 +579,12 @@ const GetCode = () => {
                         max-width:90%;
                         margin:var(--spacing) auto;
                     }
-                    ` : ``}
+                    `}
+                    {`
+                    article {
+                        max-width:90%;
+                        margin: var(--spacing) auto;
+                    }
                     ${sideImage !== 'default' ? `#side-image {display: none;}` : ''}
                     .grid section {
                         column-count: 1;
@@ -596,8 +603,8 @@ const GetCode = () => {
                     position: absolute;
                     width: 1px;
                     word-wrap: normal !important;
-                }
-                ${daynight ? `
+                }`}
+                {daynight && `
                 #daynight-toggle {
                     cursor:pointer;
                     background:;
@@ -628,23 +635,25 @@ const GetCode = () => {
                   border-radius: 50%;
                   box-shadow: .32rem .32rem 0 0 black;
                 }
-                ` : ``}
+                `}
+                {`
                 {CustomCSS}
             </style>
         </head>
-        <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
-        `}
-                        {daynight ? `<button id="daynight-toggle"><span class="screen-reader">toggle day and night mode</span></button>` : ``}
-                        {sideImage !== 'default' ? `<div id="side-image"><img src="{image:side image}"></div>` : ``}
-                        {header ? <>
+        <body class="${layout} {block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit-{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">`}
+                {daynight && `
+            <button id="daynight-toggle"><span class="screen-reader">toggle day and night mode</span></button>`}
+                        {sideImage !== 'default' && `<div id="side-image"><img src="{image:side image}"></div>`}
+                        {header && <>
                             {`  <header>`}
                             {titleLocation === 'header' ? title : ''}
                             {descriptionLocation === 'header' ? description : ''}
                             {navLocation === 'header' ? nav + pages : ''}
                             {searchBar === 'header' ? search : ''}
                             {`</header>
-                `} </> : ''}
-                        {`<main>`}
+                `} </>}
+                {`
+            <main>`}
                         {sidebar && !sidebarLocation ? (<>
                             {`
             <aside>
@@ -709,13 +718,19 @@ const GetCode = () => {
                         {`
                 <section>
                     {block:SearchPage}
-                    <article><div class="reblogs">{lang:Found SearchResultCount results for SearchQuery}</div></article>
+                        <article>
+                            <div class="reblogs">{lang:Found SearchResultCount results for SearchQuery}</div>
+                        </article>
                     {/block:SearchPage}
                     {block:TagPage}
-                    <article><div class="reblogs">{lang:Showing TagResultCount posts tagged Tag}</div></article>
+                        <article>
+                            <div class="reblogs">{lang:Showing TagResultCount posts tagged Tag}</div>
+                        </article>
                     {/block:TagPage}
                     {block:DayPage}
-                    <article><div class="reblogs">{lang:Viewing everything posted on Month DayOfMonth Year}</div></article>
+                        <article>
+                            <div class="reblogs">{lang:Viewing everything posted on Month DayOfMonth Year}</div>
+                        </article>
                     {/block:DayPage}
                     {block:Posts}
                     <!-- {block:NoRebloggedFrom}
@@ -734,8 +749,15 @@ const GetCode = () => {
                                     ? `<div class="like-and-reblog"> ${reblogs ? '{ReblogButton}' : ''} ${likes ? '{LikeButton}' : ''}</div>`
                                     : ''}
                                 </div>{/block:Date}`)
-                                : ''}  
-      
+                                : ''} 
+                                
+                                {block:RebloggedFrom}
+                                    <div class="reblog-header">
+                                        <a href="{permalink}" {block:isdeactivated}class="inactive"{/block:isdeactivated}>
+                                        <img src={ReblogRootPortraitURL-64} alt="{ReblogRootName}">  {ReblogRootName}
+                                        </a>
+                                    </div>
+                                {/block:RebloggedFrom}
                                 {block:Photo}
                                     <img src="{PhotoURL-HighRes}" alt="{photoalt}" class="photos">
                                 {/block:Photo}
@@ -813,11 +835,13 @@ const GetCode = () => {
                                     {block:Rebloggedfrom}
                                         {block:Reblogs}
                                         <div class="reblogs">
+                                        {block:IsNotOriginalEntry} 
                                             <div class="reblog-header">
                                                 <a href="{permalink}" {block:isdeactivated}class="inactive"{/block:isdeactivated}>
                                                       <img src={PortraitURL-64} alt="{username}">  {username}
                                                     </a>
                                             </div>
+                                        {/block:IsNotOriginalEntry} 
                                             <div class="reblog-content">
                                                 {Body}
                                             </div>
@@ -844,15 +868,41 @@ const GetCode = () => {
                         {PostNotes}
                     </article>
                     {/block:Posts}
-                </section>`}
-                        {sidebar && sidebarLocation ? (<>
+                    `}
+                {pagi === 'posts' && ` 
+                {block:Pagination}
+                <div class="pagination flex centered">
+                    {block:previouspage}
+                    <a href="{previouspage}">Prev</a>
+                    {/block:previouspage}
+                        {block:JumpPagination length="5"}
+                            {block:CurrentPage}
+                            <span class="current-page">
+                                {PageNumber}
+                            </span>
+                            {/block:CurrentPage}
+                            {block:JumpPage}
+                            <a href="{URL}">
+                                {PageNumber}
+                            </a>
+                            {/block:JumpPage}
+                        {/block:JumpPagination}
+                    {block:nextpage}
+                    <a href="{nextpage}">Next</a>
+                    {/block:nextpage}
+                </div>
+                {/block:Pagination}
+                `}
+                {` </section>`}
+                        {sidebar && sidebarLocation && (<>
                             {`
             <aside>
                 <div class="sidebar-container sidebar-style-${sidebarStyle}">
                         `}
                             {sidebarStyle === 'dash' ?
                                 <>
-                                    {`<div class="header-image">${searchBar === 'sidebar' ? search : ''}<img src="{PortraitURL-128}"></div>`}
+                                    {`<div class="header-image">${searchBar === 'sidebar' ? search : ''}
+                        <img src="{PortraitURL-128}"></div>`}
                                     {titleLocation === 'sidebar' ? title : ''}
                                     {descriptionLocation === 'sidebar' ? description : ''}
                                     {navLocation === 'sidebar' ? nav + pages : ''}
@@ -903,37 +953,13 @@ const GetCode = () => {
                 `: ``}
                             {`
                         </div>
-                </aside>`}</>) : ''}
-                        {pagi === 'posts' ? `
-                {block:Pagination}
-                <div class="pagination flex centered">
-                    {block:previouspage}
-                    <a href="{previouspage}">Prev</a>
-                    {/block:previouspage}
-                        {block:JumpPagination length="5"}
-                            {block:CurrentPage}
-                            <span class="current-page">
-                                {PageNumber}
-                            </span>
-                            {/block:CurrentPage}
-                            {block:JumpPage}
-                            <a href="{URL}">
-                                {PageNumber}
-                            </a>
-                            {/block:JumpPage}
-                        {/block:JumpPagination}
-                    {block:nextpage}
-                    <a href="{nextpage}">Next</a>
-                    {/block:nextpage}
-                </div>
-                {/block:Pagination}
-                `: ``}
-                        {footer ? `<footer>
-                ${titleLocation === 'footer' ? title : ''}
-                ${descriptionLocation === 'footer' ? description : ''}
-                ${navLocation === 'footer' ? nav : ''}
-                ${searchBar === 'footer' ? search : ''}
-                </footer>` : ``}
+                </aside>`}</>)}
+                        {footer && `<footer>
+                ${titleLocation === 'footer' && title }
+                ${descriptionLocation === 'footer' && description }
+                ${navLocation === 'footer' && nav}
+                ${searchBar === 'footer' && search}
+                </footer>`}
                         {`</main>${layout !== 'grid' && keyboardNav ? `  
                 <script src="https://static.tumblr.com/svdghan/uIEropkzb/keyboardscrolling.js"></script>` : ``}
             </body>
